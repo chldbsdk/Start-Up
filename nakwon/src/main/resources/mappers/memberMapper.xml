@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nakwon.mapper.MemberMapper">
+	
+	<select id="login" resultType="com.nakwon.domain.ManagerVO">
+		select * from Manager where userid=#{userid} and userpw=#{userpw}
+	</select>
+	
+</mapper>
