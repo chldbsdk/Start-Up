@@ -22,6 +22,7 @@
    text-align:center;
 }
 .topli {
+width:100px;
    display : inline-block;
    float:none;
    margin:0 40px;
@@ -38,7 +39,7 @@
 <ul class="topul">
 <li class="topli"><a href=#>소개</a></li>
 <li class="topli"><a href=#>메뉴</a></li>
-<li class="topli"><a href=#>예약</a></li>
+<li class="topli"><a href="#" onclick="location.href='http://localhost:8031/reservation'">예약</a></li>
 <li class="topli"><a href="#" onclick="location.href='http://localhost:8031/login'"><img src="resources/img/logo.png"  width="100" height="100"></a></li>
 <li class="topli"><a href="#" onclick="location.href='http://localhost:8031/location'">오시는 길</a></li>
 <li class="topli"><a href=#>고객의 소리</a></li>

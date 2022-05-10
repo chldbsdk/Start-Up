@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nakwon.domain.ManagerVO;
+import com.nakwon.domain.MenuVO;
+import com.nakwon.persistence.MenuDAO;
 import com.nakwon.service.ManagerService;
+import com.nakwon.service.MenuService;
 
 
 /**
@@ -30,6 +33,8 @@ public class HomeController {
 	
 	@Inject
 	private ManagerService service;
+	private MenuDAO dao;
+	private MenuService menu_service;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -48,17 +53,17 @@ public class HomeController {
 		return "project/main/main";
 	}
 	
-	//로그인 페이지 진입
+	//관리자 로그인 페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "project/manager/login";
 	}
 	
-	//로그인 체크
+	//로그인체크
 	@RequestMapping(value="/logincheck",method=RequestMethod.POST)
 	public String logincheck(HttpServletRequest request, ManagerVO vo, RedirectAttributes rttr) throws Exception {
-//		System.out.println("login 메서드 진입");
-//		System.out.println("전달된 데이터 : "+vo);
+//		System.out.println("login 硫붿꽌�뱶 吏꾩엯");
+//		System.out.println("�쟾�떖�맂 �뜲�씠�꽣 : "+vo);
 		
 		HttpSession session = request.getSession();
 		ManagerVO lvo = service.login(vo);
@@ -69,21 +74,46 @@ public class HomeController {
 			return "redirect:/login";
 		}
 		
-		session.setAttribute("member", lvo); //임시코드 신경 ㄴㄴ
+		session.setAttribute("member", lvo); //�엫�떆肄붾뱶 �떊寃� �꽩�꽩
 		
-		return "redirect:/managerMain"; //성공 시 관리자 메인으로 이동
+		return "redirect:/managerMain"; //�꽦怨� �떆 愿�由ъ옄 硫붿씤�쑝濡� �씠�룞
 	}
-	//관리자페이지 메인
+	//관리자페이지
 	@RequestMapping(value = "/managerMain", method = RequestMethod.GET)
 	public String managerMain(Locale locale, Model model) {
 		
 		return "project/manager/managerMain";
 	}
 	
-	//로그인 페이지 진입
-		@RequestMapping(value = "/location", method = RequestMethod.GET)
-		public String location() {
-			return "project/location/location";
+	//오시는길
+	@RequestMapping(value = "/location", method = RequestMethod.GET)
+	public String location() {
+		return "project/location/location";
+	}
+		
+	@RequestMapping(value = "/menuAdd", method = RequestMethod.POST)
+	public String menuAdd(Locale locale, Model model,HttpServletRequest request,MenuVO vo) throws Exception{
+
+		
+		 MenuVO board = new MenuVO();
+//		 board.setMenuCode(1);
+//		 board.setMenuTitle(request.getParameter("MenuTitle"));
+//		 board.setMenuContent(request.getParameter("MenuContent"));
+//		 board.setMenuImg(request.getParameter("MenuImg"));
+//		 board.setMenuPrice(request.getParameter("MenuPrice"));
+//		 board.setMenuIngredients(request.getParameter("MenuIngredients"));
+//		 board.setMenuAllergy(request.getParameter("MenuAllergy"));
+//		 menu_service.insert(board);
+		 
+		logger.info("BoardVO : "+board);
+		menu_service.insert(board);
+	    
+	    return "redirect:/managerMain";
 		}
 	
+	//예약페이지 진입
+	@RequestMapping(value = "/reservation", method = RequestMethod.GET)
+	public String reservation() {
+		return "project/reservation/reservation";
+	}
 }
