@@ -1,4 +1,5 @@
 <%@ page session="false" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,7 +136,7 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 <div id="reservationTable-allwrap">
 	<div class="reservationTableText">예약</div>
 	<div id="reservationTable-wrap">
-	<form class="reservation-form" name="reservationform" action="logincheck.do" method="post">
+	<form class="reservation-form" name="reservationform" action="registerResv.do" method="post">
 	<table class="reservationTable">
 		<tr><td class="reservationTableTextBig" colspan="2">주소</td></tr>
 		<tr><td colspan="2" style="border-bottom: 2px solid #dddddd;"><ul class="reservationTableTextSmall"><li>인천광역시 미추홀구 인하로 100</li></ul></td></tr>
@@ -160,17 +161,17 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 		<tr><td class="reservationTableTextSmall" colspan="2" style="color: black; font-weight: bold; padding: 20px 0 15px 0;">(<span class="essential">*</span> 표시는 필수입력 사항으로 반드시 기재해야 하는 항목)</td></tr>
 		<tr><td class="reservationTitle">예약자명 <span class="essential">*</span></td><td><input class="reservationInput" name="name" type="text" required></td></tr>
 		<tr><td class="reservationTitle">연락처 <span class="essential">*</span></td><td><input class="reservationInput" name="phone" placeholder="'-'를 제외하고 입력해주세요" type="text" required></td></tr>
-		<tr style="border-bottom: 2px solid #dddddd;"><td class="reservationTitle" style="padding-bottom: 15px;">이메일 <span class="essential">*</span></td><td style="padding-bottom: 15px;"><input class="reservationInput" name="email" type="text" required> @ 
+		<tr style="border-bottom: 2px solid #dddddd;"><td class="reservationTitle" style="padding-bottom: 15px;">이메일 <span class="essential">*</span></td><td style="padding-bottom: 15px;"><input class="reservationInput" id="email" name="email" type="text" required><div id="at" style="display: inline-block"> @ </div> 
 				<select id="domain" name="domain" onChange="direct(this)" required>
 					<option value="">도메인 선택</option>
-					<option value="@naver.com">naver.com</option>
-					<option value="@nate.com">nate.com</option>
-					<option value="@gmail.com">gmail.com</option>
-					<option value="@hanmail.com">hanmail.com</option>
+					<option value="naver.com">naver.com</option>
+					<option value="nate.com">nate.com</option>
+					<option value="gmail.com">gmail.com</option>
+					<option value="hanmail.com">hanmail.com</option>
 					<option value="direct">직접입력</option>
 				</select>
 				<!-- 직접입력 누르면 나올 inputbox -->
-				<input type="text" id="selBoxDirect" name="selBoxDirect" style="display: none;">
+				<input type="text" id="selBoxDirect" name="selBoxDirect" style="display: none;" onblur="directonblur()" required>
 			</td>
 		</tr>
 		<tr><td class="reservationTitle" style="padding-top: 15px;">예약일 <span class="essential">*</span></td><td style="padding-top: 15px;"><input type="text" required class="reservationInput" name="publeYear" placeholder="날짜선택(클릭해주세요)" autocomplete="off" >
@@ -217,9 +218,11 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 		<tr style="border-bottom: 2px solid #dddddd;"><td class="reservationTitle" style="padding-bottom: 15px;">메뉴 <span class="essential">*</span></td><td style="padding-bottom: 15px;">
 					<select id="courseselect" name="courseselect" onchange="courseChange(this)" required>
 						<option value="" selected>코스선택</option>
-						<option value="a">만찬(풀코스)</option>
-						<option value="b">정찬(세트메뉴)</option> <!-- 임의로 value 넣어놈, 나중에 db에 있는 코드로 바꿀것임. -->
+						<c:forEach items="${menuList}" var="menu">
+						<option value="">${menu.CodeName}</option>
+						</c:forEach>
 					</select>
+					
 					<select id="menuselect" name="menuselect" required>
 						<option value="">메뉴선택</option>
 					</select>
@@ -241,11 +244,31 @@ function direct(e){
 	$("#domain option:selected").each(function () { 
 		if(e.value == "direct"){ //직접입력을 선택할 경우 
         	$("#selBoxDirect").show(); //input박스 보이게 하기
-        	$("#domain").hide(); //select박스 숨기기
+        	$("#selBoxDirect").val(""); //input박스 초기화(직접입력 후 select박스 선택 후 직접입력 하는 경우 이전에 작성한 기록이 남아있기 때문)
+        	$("#selBoxDirect").focus();//input박스에 포커스 두기
       	} else { //직접입력 선택 안한 경우 
           	$("#selBoxDirect").hide(); //input박스 숨기기
+          	emailPlusDomain();
       	} 
 	});
+}
+
+//직접입력 inputbox 포커스 잃을 때, email과 domain 합치는 함수 호출
+function directonblur(){
+	email = $("#email").val(); //사용자 이메일 id 가져오기
+	at = $.trim($("#at").text()); // '@' 가져오기
+	if($("#selBoxDirect").val() != ""){ //직접입력 input박스가 빈칸이 아닐 경우
+		domain = $("#selBoxDirect").val(); //input박스의 도메인 가져오기
+		total = email + at + domain; //합치기
+	}
+}
+
+//직접입력 안눌렀을 때, email과 domain 합치는 함수 호출
+function emailPlusDomain(){
+	email = $("#email").val(); //사용자 이메일 id 가져오기
+	at = $.trim($("#at").text()); // '@' 가져오기
+	domain = $("#domain").val(); //도메인 가져오기(select박스)
+	total = email + at + domain; //합치기
 }
 
 //달력 설정 
@@ -297,6 +320,7 @@ function courseChange(e){
 		target.appendChild(opt);
 	}
 }
+
 </script>
 
 <%@ include file="../main/footer.jsp" %>

@@ -1,7 +1,7 @@
 package com.nakwon.persistence;
 
 import javax.inject.Inject;
-
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +18,8 @@ public class MenuDAOImpl implements MenuDAO{
 		sqlSession.insert(namespace+".insert",vo);
 	}
 	
+	@Override
+	public List<MenuVO> menuListAll()throws Exception {
+		return sqlSession.selectList(namespace+".menuListAll");
+	}
 }

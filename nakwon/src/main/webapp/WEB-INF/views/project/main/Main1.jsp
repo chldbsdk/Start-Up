@@ -108,7 +108,7 @@
    <p class="detail">    공간의 가치를 담은<br>
                   안락한 '맛의 무릉도원'<br>
                   3대째 이어져 오는 고급한정식</p>   
-   <a class="button" onclick="goReplace('./.jsp')">예약하기</a>
+   <a class="button" onclick="location.href='http://localhost:8031/reservationMain'">예약하기</a>
 </div>
 
 

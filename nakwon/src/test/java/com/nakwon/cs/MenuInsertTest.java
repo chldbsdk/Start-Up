@@ -16,15 +16,5 @@ public class MenuInsertTest {
 	@Inject
 	private MenuDAO dao;
 	
-	@Test
-	public void testInsertMember() throws Exception {
-		MenuVO vo = new MenuVO();
-		vo.setMenuTitle("들어감?");
-		vo.setMenuContent("들어가봐");
-		/* vo.setMenuImg(); */
-		vo.setMenuPrice("2만우너");
-	    vo.setMenuIngredients("이거저거");
-	    vo.setMenuAllergy("땅콩");
-		dao.insert(vo);
-	}
 }
+	

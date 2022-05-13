@@ -1,30 +1,62 @@
 package com.nakwon.domain;
 
 public class MenuVO {
-	private int MenuCode;
-	private String MenuTitle;
+	private String Code;
+	private String CodeName;
+	private String MenuCode;
+	private String MenuCodeName;
+	private String MenuDetailCode;
+	private String MenuDetailCodeName;
 	private String MenuContent;
 	private String MenuImg;
 	private String MenuPrice;
 	private String MenuIngredients;
 	private String MenuAllergy;
+	
 	@Override
 	public String toString() {
-		return "MenuVO [MenuCode=" + MenuCode + ", MenuTitle=" + MenuTitle + ", MenuContent=" + MenuContent
-				+ ", MenuImg=" + MenuImg + ", MenuPrice=" + MenuPrice + ", MenuIngredients=" + MenuIngredients
-				+ ", MenuAllergy=" + MenuAllergy + "]";
+		return "MenuVO [Code=" + Code + ", MenuCode=" + MenuCode + ", MenuCodeName=" + MenuCodeName
+				+ ", MenuDetailCode=" + MenuDetailCode + ", MenuDetailCodeName=" + MenuDetailCodeName + ", MenuContent="
+				+ MenuContent + ", MenuImg=" + MenuImg + ", MenuPrice=" + MenuPrice + ", MenuIngredients="
+				+ MenuIngredients + ", MenuAllergy=" + MenuAllergy + "]";
 	}
-	public int getMenuCode() {
+
+	
+	public String getCode() {
+		return Code;
+	}
+	public void setCode(String code) {
+		Code = code;
+	}
+	public String getCodeName() {
+		return CodeName;
+	}
+	public void setCodeName(String codeName) {
+		CodeName = codeName;
+	}
+	public String getMenuCode() {
 		return MenuCode;
 	}
-	public void setMenuCode(int menuCode) {
+	public void setMenuCode(String menuCode) {
 		MenuCode = menuCode;
 	}
-	public String getMenuTitle() {
-		return MenuTitle;
+	public String getMenuCodeName() {
+		return MenuCodeName;
 	}
-	public void setMenuTitle(String menuTitle) {
-		MenuTitle = menuTitle;
+	public void setMenuCodeName(String menuCodeName) {
+		MenuCodeName = menuCodeName;
+	}
+	public String getMenuDetailCode() {
+		return MenuDetailCode;
+	}
+	public void setMenuDetailCode(String menuDetailCode) {
+		MenuDetailCode = menuDetailCode;
+	}
+	public String getMenuDetailCodeName() {
+		return MenuDetailCodeName;
+	}
+	public void setMenuDetailCodeName(String menuDetailCodeName) {
+		MenuDetailCodeName = menuDetailCodeName;
 	}
 	public String getMenuContent() {
 		return MenuContent;
@@ -55,9 +87,5 @@ public class MenuVO {
 	}
 	public void setMenuAllergy(String menuAllergy) {
 		MenuAllergy = menuAllergy;
-	}
-	public MenuVO() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 }
