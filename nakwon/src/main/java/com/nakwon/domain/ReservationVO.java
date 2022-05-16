@@ -1,21 +1,22 @@
 package com.nakwon.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ReservationVO {
-	private int RsrvCode;
+	private String RsrvCode;
 	private String Phone;
 	private String Name;
 	private String Email;
-	private Date RsvDate;
+	private Timestamp RsvDate;
 	private int Pnum;
 	private String Message;
-	private int MenuCode;
+	private String Code;
+	private String MenuCode;
 	
-	public int getRsrvCode() {
+	public String getRsrvCode() {
 		return RsrvCode;
 	}
-	public void setRsrvCode(int rsrvCode) {
+	public void setRsrvCode(String rsrvCode) {
 		RsrvCode = rsrvCode;
 	}
 	public String getPhone() {
@@ -36,10 +37,10 @@ public class ReservationVO {
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public Date getRsvDate() {
+	public Timestamp getRsvDate() {
 		return RsvDate;
 	}
-	public void setRsvDate(Date rsvDate) {
+	public void setRsvDate(Timestamp rsvDate) {
 		RsvDate = rsvDate;
 	}
 	public int getPnum() {
@@ -54,17 +55,22 @@ public class ReservationVO {
 	public void setMessage(String message) {
 		Message = message;
 	}
-	public int getMenuCode() {
+	public String getMenuCode() {
 		return MenuCode;
 	}
-	public void setMenuCode(int menuCode) {
+	public void setMenuCode(String menuCode) {
 		MenuCode = menuCode;
 	}
-	
+	public String getCode() {
+		return Code;
+	}
+	public void setCode(String code) {
+		Code = code;
+	}
 	@Override
 	public String toString() {
 		return "ReservationVO [RsrvCode=" + RsrvCode + ", Phone=" + Phone + ", Name=" + Name + ", Email=" + Email
-				+ ", RsvDate=" + RsvDate + ", Pnum=" + Pnum + ", Message=" + Message + ", MenuCode=" + MenuCode + "]";
+				+ ", RsvDate=" + RsvDate + ", Pnum=" + Pnum + ", Message=" + Message + ", Code=" + Code + ", MenuCode="
+				+ MenuCode + "]";
 	}
-	
 }

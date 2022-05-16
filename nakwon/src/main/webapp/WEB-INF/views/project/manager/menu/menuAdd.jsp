@@ -80,15 +80,15 @@ background-color:lightgray;
 
 .btn_next {
 display: block;
-   width: 40px;
-    height: 40px;
-    margin: 5px auto;
-    color: black;
+width: 40px;
+height: 40px;
+margin: 5px auto;
+color: black;
 font-size: 1rem;
 border: none;
 border-radius:10px;
-    cursor: pointer;
-    transition: .3s linear;
+cursor: pointer;
+transition: .3s linear;
 float:right;
 background-color:lightgray;
 } 
@@ -214,7 +214,7 @@ cursor: pointer;
 		<!-- <button type="button" class="btn_img" onclick="imgupload()"><i class="fas fa-plus"></i></button> -->
 		<br>
 		
-		<button type="button" class="btn_next" onclick="nextBtn()">등록</button>
+		<button type="button" class="btn_next" onclick="AddBtn()">등록</button>
 		
 		</div>
 		</div>
@@ -277,7 +277,7 @@ cursor: pointer;
 	  });
 	}
 	
-	function nextBtn() {
+	function AddBtn() {
 		if(document.menuAddform.MenuDetailCodeName.value=="") {
 			alert("메뉴명을 입력해주세요.");
 			document.menuAddform.MenuDetailCodeName.focus();
@@ -307,7 +307,8 @@ cursor: pointer;
 			document.menuAddform.MenuAllergy.focus();
 			return;
 		}
-
+		
+		alert("등록 성공");
 		document.menuAddform.submit();
 	}
 	

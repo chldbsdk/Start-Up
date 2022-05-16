@@ -14,7 +14,7 @@ public class MenuController {
 	@Inject
 	private MenuService menuservice;
 	
-	//�޴���� GET
+	//�޴� ��� GET
 	@RequestMapping(value="/menuAdd", method=RequestMethod.GET)
 	public void menuAddGET(MenuVO vo, Model model) throws Exception{
 		System.out.println("MenuVO GET Called");
@@ -22,7 +22,7 @@ public class MenuController {
 		
 	}
 	
-	//�޴���� POST
+	//�޴� ��� POST
 	@RequestMapping(value="/menuAdd", method=RequestMethod.POST)
 	public void menuAddPOST(MenuVO vo, Model model) throws Exception {
 		System.out.println("MenuVO POST Called");

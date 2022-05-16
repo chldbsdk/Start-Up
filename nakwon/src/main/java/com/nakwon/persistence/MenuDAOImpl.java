@@ -22,4 +22,9 @@ public class MenuDAOImpl implements MenuDAO{
 	public List<MenuVO> menuListAll()throws Exception {
 		return sqlSession.selectList(namespace+".menuListAll");
 	}
+	
+	@Override
+	public List<MenuVO> menuCodeListAll(String Code)throws Exception {
+		return sqlSession.selectList(namespace+".menuCodeListAll", Code);
+	}
 }

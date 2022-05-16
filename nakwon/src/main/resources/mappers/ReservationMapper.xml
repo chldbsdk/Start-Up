@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.nakwon.mapper.ReservationMapper">
 	<!-- 예약 등록 -->
-	<insert id="insertReservation">
-		insert into Reservation (Phone, Name, Email, Pnum, Message)
+	<insert id="insertReservationHold">
+		insert into ReservationHold (Phone, Name, Email, Pnum, Message)
 		values (#{Phone}, #{Name}, #{Email}, #{Pnum}, #{Message})
 	</insert>
 	

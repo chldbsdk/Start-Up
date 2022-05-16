@@ -9,12 +9,12 @@
 <style>
 	/*폰트*/
 	@font-face {
-    font-family: 'HSGyoulnoonkot';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGyoulnoonkot.woff') format('woff');
+    font-family: 'Yeon Sung',cursive;
+    src: url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap');
     font-weight: normal;
     font-style: normal;
 	}
-	body {font-family: 'HSGyoulnoonkot';}
+	body {font-family: 'Yeon Sung',cursive;}
 
 </style>
 

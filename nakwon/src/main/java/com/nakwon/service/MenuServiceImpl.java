@@ -20,4 +20,9 @@ public class MenuServiceImpl implements MenuService{
 	public List<MenuVO> menuListAll()throws Exception {
 		return dao.menuListAll();
 	}
+	
+	@Override
+	public List<MenuVO> menuCodeListAll(String Code)throws Exception {
+		return dao.menuCodeListAll(Code);
+	}
 }

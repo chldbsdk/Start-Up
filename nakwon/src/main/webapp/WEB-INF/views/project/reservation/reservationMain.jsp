@@ -92,7 +92,7 @@ body {
 				<span class="rightspan">* 매주 일요일, 월요일은 휴무입니다.</span>
 			</li>
 			<li class="noshow">* No Show(예약을 하고 나타나지 않는 행위) 방지를 위해 예약금을 받고 있습니다.</li>
-			<li class="noshow">* 예약금은 1인 기준 80,000원을 받고 있습니다.</li>
+			<li class="noshow">* 예약금은 1인 기준 50,000원을 받고 있습니다.</li>
 			<li class="penalty">  - 3일 전 취소: 패널티 없음</li>
 			<li class="penalty">  - 2일 전 취소: 예약금 50% 패널티 적용</li>
 			<li class="penalty">  - 1일 전 및 당일 취소: 예약금 100% 패널티 적용</li>
