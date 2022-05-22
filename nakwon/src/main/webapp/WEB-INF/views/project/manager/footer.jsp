@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -6,15 +6,16 @@
 <meta charset="UTF-8">
 <title>manager footer</title>
 <style>
- 	@font-face {
-    	font-family: 'HSGyoulnoonkot';
-   	 	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGyoulnoonkot.woff') format('woff');
-   		font-weight: normal;
+	@font-face {
+    	font-family: 'Yeon Sung', cursive;
+   	 	src: url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap') ;
+   	 	font-weight: normal;
     	font-style: normal;
 	}
-	body {font-family: 'HSGyoulnoonkot';box-sizing: border-box; margin: 0px;}
-      
-      .jb-container {
+	
+	body {font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
+	
+ 	 .jb-container {
         height: 140px; line-height : 35px;
         background-color: #A4A4A4;
         display: flex;

@@ -97,6 +97,15 @@ public class HomeController {
 		return "project/manager/managerMain";
 	}
 
+	//메뉴등록
+	@RequestMapping(value="/managerMain", method=RequestMethod.POST)
+	public String managerMainMenuAddPOST(MenuVO vo, Model model) throws Exception{
+		System.out.println("MenuVO GET Called");
+		menuservice.insert(vo);
+		model.addAttribute("list", menuservice.menuListAll());
+		return "redirect:/managerMain";
+	}
+	
 	// 오시는길 mapping
 	@RequestMapping(value = "/location", method = RequestMethod.GET)
 	public String location() {
