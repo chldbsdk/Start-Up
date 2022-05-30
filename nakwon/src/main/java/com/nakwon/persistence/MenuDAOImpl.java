@@ -19,6 +19,11 @@ public class MenuDAOImpl implements MenuDAO{
 	}
 	
 	@Override
+	public MenuVO read(String MenuDetailCode) throws Exception {
+		return sqlSession.selectOne(namespace+".read",MenuDetailCode);
+	}
+	
+	@Override
 	public List<MenuVO> menuListAll()throws Exception {
 		return sqlSession.selectList(namespace+".menuListAll");
 	}
@@ -26,5 +31,15 @@ public class MenuDAOImpl implements MenuDAO{
 	@Override
 	public List<MenuVO> menuCodeListAll(String Code)throws Exception {
 		return sqlSession.selectList(namespace+".menuCodeListAll", Code);
+	}
+	
+	@Override
+	public List<MenuVO> menuCode(String MenuCode)throws Exception {
+		return sqlSession.selectList(namespace+".menuCode", MenuCode);
+	}
+	
+	@Override
+	public MenuVO test(String MenuCode) throws Exception {
+		return sqlSession.selectOne(namespace+".test",MenuCode);
 	}
 }

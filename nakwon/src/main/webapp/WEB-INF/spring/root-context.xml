@@ -10,8 +10,8 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 			<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-			<property value="jdbc:mysql://54.180.108.229:3306/nakwonDB?serverTimezone=UTC&amp;characterEncoding=UTF-8&amp;useSSL=false" name="url"/>
-			<property name="username" value="user"></property>
+			<property value="jdbc:mysql://database-1.c99zbejrrplz.ap-northeast-2.rds.amazonaws.com:3306/nakwonDB?serverTimezone=UTC&amp;characterEncoding=UTF-8&amp;useSSL=false" name="url"/>
+			<property name="username" value="admin"></property>
 			<property name="password" value="Nakwon2022!"></property>
 		</bean>	
 		

@@ -7,7 +7,7 @@
 <style>
 body {
 	font-family: 'HSGyoulnoonkot';
-	background-image : url("resources/Main2img/한지.jpg"); /*배경 바꿀거임*/
+	background-image : url("resources/Main2img/한지.jpg"); 
 }
 #resv-allwrap {
 	padding-top: 80px;
@@ -67,6 +67,20 @@ body {
 	margin-top: 30px;
 	float: right;
 }
+.resvCheckBtn{
+	display: block;
+	text-decoration: none;
+	color: #8d825a;
+	font-size: 17px;
+	text-align: center;
+	border: 1px solid #a99e78;
+	width: 180px;
+	height: 60px;
+	line-height: 60px;
+	margin-top: 30px;
+	margin-right: 20px;
+	float: right;
+}
 </style>
 </head>
 <body>
@@ -102,6 +116,7 @@ body {
 			</ul>
 			<hr style="background-color: #a99e78; height: 1px;">
 			<a class="resvBtn" href="#" onClick="location.href='http://localhost:8031/reservation'">예약하기</a>
+			<a class="resvCheckBtn" href="#" onClick="location.href='http://localhost:8031/reservationCheck'">예약조회</a>
 		</div>
 	</div>
 </div>

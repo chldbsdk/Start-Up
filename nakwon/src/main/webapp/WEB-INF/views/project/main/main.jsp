@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <title>낙원</title>
 </head>
+<style>
+ @font-face {
+    font-family: 'HSGyoulnoonkot';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGyoulnoonkot.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+   }
+   body {font-family: 'HSGyoulnoonkot';}
+</style>
 <body>
 <header><%@ include file="top.jsp" %></header>
 <div>

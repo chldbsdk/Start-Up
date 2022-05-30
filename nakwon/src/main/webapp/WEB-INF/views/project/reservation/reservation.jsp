@@ -161,7 +161,7 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 		<tr><td class="reservationTableTextSmall" colspan="2" style="color: black; font-weight: bold; padding: 20px 0 15px 0;">(<span class="essential">*</span> 표시는 필수입력 사항으로 반드시 기재해야 하는 항목)</td></tr>
 		<tr><td class="reservationTitle">예약자명 <span class="essential">*</span></td><td><input class="reservationInput" name="name" type="text" required></td></tr>
 		<tr><td class="reservationTitle">연락처 <span class="essential">*</span></td><td><input class="reservationInput" name="phone" placeholder="'-'를 제외하고 입력해주세요" type="text" required></td></tr>
-		<tr style="border-bottom: 2px solid #dddddd;"><td class="reservationTitle" style="padding-bottom: 15px;">이메일 <span class="essential">*</span></td><td style="padding-bottom: 15px;"><input class="reservationInput" id="user-email" name="email" type="text" required><div id="at" style="display: inline-block"> @ </div> 
+		<tr style="border-bottom: 2px solid #dddddd;"><td class="reservationTitle" style="padding-bottom: 15px;">이메일 <span class="essential">*</span></td><td style="padding-bottom: 15px;"><input class="reservationInput" id="user-email" name="user-email" type="text" required><div id="at" style="display: inline-block"> @ </div> 
 				<select id="domain" name="domain" onChange="direct(this)" required>
 					<option value="">도메인 선택</option>
 					<option value="naver.com">naver.com</option>
@@ -177,20 +177,20 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 		<tr><td class="reservationTitle" style="padding-top: 15px;">예약일 <span class="essential">*</span></td><td style="padding-top: 15px;"><input type="text" id="publeYear" class="reservationInput" name="publeYear" placeholder="날짜선택(클릭해주세요)" autocomplete="off" required>
 				<select id="timeselect" name="timeselect" required>
 					<option value="" selected>시간</option>
-					<option value="16 : 00">16:00</option>
-					<option value="16 : 30">16:30</option>
-					<option value="17 : 00">17:00</option>
-					<option value="17 : 30">17:30</option>
-					<option value="18 : 00">18:00</option>
-					<option value="18 : 30">18:30</option>
-					<option value="19 : 00">19:00</option>
-					<option value="19 : 30">19:30</option>
-					<option value="20 : 00">20:00</option>
-					<option value="20 : 30">20:30</option>
-					<option value="21 : 00">21:00</option>
-					<option value="21 : 30">21:30</option>
-					<option value="22 : 00">22:00</option>
-					<option value="22 : 30">22:30</option>
+					<option value="16:00:00">16 : 00</option>
+					<option value="16:30:00">16 : 30</option>
+					<option value="17:00:00">17 : 00</option>
+					<option value="17:30:00">17 : 30</option>
+					<option value="18:00:00">18 : 00</option>
+					<option value="18:30:00">18 : 30</option>
+					<option value="19:00:00">19 : 00</option>
+					<option value="19:30:00">19 : 30</option>
+					<option value="20:00:00">20 : 00</option>
+					<option value="20:30:00">20 : 30</option>
+					<option value="21:00:00">21 : 00</option>
+					<option value="21:30:00">21 : 30</option>
+					<option value="22:00:00">22 : 00</option>
+					<option value="22:30:00">22 : 30</option>
 				</select>
 			</td>
 		</tr>
@@ -218,9 +218,8 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 		<tr style="border-bottom: 2px solid #dddddd;"><td class="reservationTitle" style="padding-bottom: 15px;">메뉴 <span class="essential">*</span></td><td style="padding-bottom: 15px;">
 					<select id="courseselect" name="courseselect" onchange="courseChange(this)" required>
 						<option value="" selected>코스선택</option>
-						<c:forEach items="${menuList}" var="menu">
-						<option value="${menu.code}">${menu.codeName}</option>
-						</c:forEach>
+						<option value="course">만찬(풀코스)</option>
+						<option value="set">정찬(세트메뉴)</option>
 					</select>
 					
 					<select id="menuselect" name="menuselect">
@@ -232,7 +231,8 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 			<input type="hidden" name="email" value="" >
 			<input type="hidden" name="rsrvDate" value="" >
 			<input type="hidden" name="rsrvCode" value="" >
-		
+			<input type="hidden" name="CodeName" value="" >
+			<input type="hidden" name="MenuCodeName" value="" >
 			</td>
 		</tr>
 	</table>
@@ -257,29 +257,9 @@ function direct(e){
           	$("#selBoxDirect").hide(); //input박스 숨기기
           	$("#selBoxDirect").attr("disabled", true); //비활성화
           	$("#domain").attr("disabled", false); //비활성화
-          	emailPlusDomain();
+          	//emailPlusDomain();
       	} 
 	});
-}
-
-//직접입력 inputbox 포커스 잃을 때, email과 domain 합치는 함수 호출
-function directonblur(){
-	email = $("#user-email").val(); //사용자 이메일 id 가져오기
-	at = $.trim($("#at").text()); // '@' 가져오기
-	if($("#selBoxDirect").val() != ""){ //직접입력 input박스가 빈칸이 아닐 경우
-		domain = $("#selBoxDirect").val(); //input박스의 도메인 가져오기
-		total = email + at + domain; //합치기
-		$("#email").val(total);
-	}
-}
-
-//직접입력 안눌렀을 때, email과 domain 합치는 함수 호출
-function emailPlusDomain(){
-	email = $("#user-email").val(); //사용자 이메일 id 가져오기
-	at = $.trim($("#at").text()); // '@' 가져오기
-	domain = $("#domain").val(); //도메인 가져오기(select박스)
-	total = email + at + domain; //합치기
-	$("#email").val(total);
 }
 
 //달력 설정 
@@ -336,10 +316,13 @@ function courseChange(e){
 	});  
 }
 
+//submit전에 함수 실행
 document.getElementById("reservationform").onsubmit=function(){
+	//날짜와 시간 합치기
 	datetime = $("#publeYear").val() + " " + $("#timeselect").val();
-	$("input[name=rsrvDate]").attr("value", datetime);
+	$("input[name=rsrvDate]").attr("value", datetime); //name이 rsrvDate인 input에 datetime을 value로 지정
 	
+	//예약코드(6자리 난수) 생성
 	charList = "012345678ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	result = "";
 	num = 6;
@@ -347,25 +330,29 @@ document.getElementById("reservationform").onsubmit=function(){
 	for(i=0; i<num; i++){
 		result += charList.charAt(Math.floor(Math.random() * charListLen));
 	}
-	$("input[name=rsrvCode]").attr("value", result);
+	//생성한 난수가 db에 이미 존재하는지 확인
+	
+	$("input[name=rsrvCode]").attr("value", result); //name이 rsrvCode인 input에 result을 value로 지정
+	
+	//사용자 이메일과 도메인 합치기
+	if($("#domain option:selected").val() == "direct"){ //직접입력을 선택한 경우
+		email = $("#user-email").val(); //사용자 이메일 id 가져오기
+		at = $.trim($("#at").text()); // '@' 가져오기
+		domain = $("#selBoxDirect").val(); //input박스의 도메인 가져오기				
+     } else { //직접입력 선택 안한 경우 
+    	email = $("#user-email").val(); //사용자 이메일 id 가져오기
+      	at = $.trim($("#at").text()); // '@' 가져오기
+     	domain = $("#domain").val(); //도메인 가져오기(select박스)
+    } 
+	total = email + at + domain; //합치기
+	$("input[name=email]").attr("value", total); //name이 email인 input에 total을 value로 지정
+	
+	//ConeName, MenuCodeName보내기
+	CodeName = $("#courseselect option:selected").text();
+	MenuCodeName = $("#menuselect option:selected").text();
+	$("input[name=CodeName]").attr("value", CodeName);
+	$("input[name=MenuCodeName]").attr("value", MenuCodeName);
 }
-//날짜와 시간을 합치는 함수
-//function DateplusTime(){
-//	datetime = $("#publeYear").val() + " " + $("#timeselect").val();
-//	$("input[name=rsrvDate]").attr("value", datetime);
-//}
-
-//6자리 예약코드 생성
-/* function RandomStringCode(){
-	charList = "012345678ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	result = "";
-	num = 6;
-	charListLen = charList.length;
-	for(i=0; i<num; i++){
-		result += charList.charAt(Math.floor(Math.random() * charListLen));
-	}
-	$("input[name=rsrvCode]").attr("value", result);
-} */
 
 </script>
 

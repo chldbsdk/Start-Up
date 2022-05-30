@@ -6,8 +6,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.nakwon.mapper.MenuMapper">
 	<insert id="insert">
 		insert into Menu (Code, CodeName, MenuCode, MenuCodeName, MenuDetailCode, MenuDetailCodeName, MenuContent, MenuImg, MenuPrice, MenuIngredients, MenuAllergy)
-		values(#{Code}, #{CodeName}, #{MenuCode}, #{MenuCodeName}, #{MenuDetailCode}, #{MenuDetailCodeName}, #{MenuContent},#{MenuImg},#{MenuPrice},#{MenuIngredients},#{MenuAllergy})
+		values(#{Code}, #{CodeName}, #{MenuCode}, #{MenuCodeName}, #{MenuDetailCode}, #{MenuDetailCodeName}, #{MenuContent}, #{MenuImg}, #{MenuPrice}, #{MenuIngredients}, #{MenuAllergy})
 	</insert>
+	
+	<select id="read" resultType="MenuVO">
+	select * from Menu
+	where MenuDetailCode = #{MenuDetailCode}
+	</select>
+	
+	<select id="test" resultType="MenuVO">
+	select * from Menu
+	where MenuCode = #{MenuCode}
+	</select>
 	
 	<select id="menuListAll" resultType="com.nakwon.domain.MenuVO">
 	<![CDATA[
@@ -22,5 +32,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from Menu
 	where Code = #{Code}
 	]]>
+	</select>
+	
+	<select id="menuCode" parameterType="String" resultType="com.nakwon.domain.MenuVO">
+	<![CDATA[
+	select *
+	from Menu
+	where MenuCode = #{MenuCode}
+	]]>
+	</select>
+	
+	<select id="courseClassification" resultType="String">
+	select MenuCode from Menu
+	where Code="course"
+	</select>
+	
+	<select id="setClassification" resultType="String">
+	select MenuCode from Menu
+	where Code="set"
 	</select>
 </mapper>

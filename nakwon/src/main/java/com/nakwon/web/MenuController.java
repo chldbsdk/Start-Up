@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import com.nakwon.service.MenuService;
@@ -60,27 +61,25 @@ public class MenuController {
 			
 	}
 	
-	//메뉴 목록
-		@RequestMapping(value="/home", method=RequestMethod.GET)
-		public String home(MenuVO vo, Model model) throws Exception{
-			System.out.println("MenuVO GET Called");
-			model.addAttribute("list", menuservice.menuListAll());
-			return "home";
-		}
-		
-//		//메뉴 목록
-//				@RequestMapping(value="/test", method=RequestMethod.GET)
-//				public String test(MenuVO vo, Model model) throws Exception{
-//					System.out.println("MenuVO GET Called");
-//					model.addAttribute("list", menuservice.menuListAll());
-//					return "test";
-//				}
-//				
-//				@RequestMapping(value="/test2", method=RequestMethod.GET)
-//				public String test2(MenuVO vo, Model model) throws Exception{
-//					System.out.println("MenuVO GET Called");
-//					model.addAttribute("list", menuservice.menuListAll());
-//					return "test2";
-//				}
+	@RequestMapping(value="/viewMenu", method=RequestMethod.GET)
+	public void viewMenu(@RequestParam("MenuDetailCode") String MenuDetailCode,Model model) throws Exception{
+		System.out.println("ss GET Called");
+		model.addAttribute("menu", menuservice.read(MenuDetailCode));
+			
+	}
+	//test
+	@RequestMapping(value="/test", method=RequestMethod.GET)
+	public void test(MenuVO vo, Model model) throws Exception{
+		System.out.println("ss GET Called");
+		model.addAttribute("list", menuservice.menuListAll());
+			
+	}
+	
+	@RequestMapping(value="/test2", method=RequestMethod.GET)
+	public void test2(@RequestParam("MenuDetailCode") String MenuDetailCode,Model model) throws Exception{
+		System.out.println("ss GET Called");
+		model.addAttribute("menu",menuservice.read(MenuDetailCode));
+			
+	}
 
 }

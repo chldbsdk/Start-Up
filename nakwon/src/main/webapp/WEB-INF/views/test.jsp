@@ -16,11 +16,11 @@
 #popup01{
 vertical-align:middle;
 display: none;
-width:800px;
-height:800px;
+width:500px;
+height:500px;
 position: absolute;
-top:30%;
-left: 43%;
+top: 50%;
+left: 50%;
 margin: -250px 0 0 -250px;
 background-color: #fff;
 z-index: 2;
@@ -50,24 +50,10 @@ align:right;
 }
 #listTbl {
 margin: 0 auto;
-border-top: 1px solid #444444;
-border-collapse: collapse;
-width:800px;
-}
-#listTbl th,td {
-border-bottom: 1px solid #444444;
-border-left: 1px solid #444444;
-padding: 10px;
-}
-#listTbl th:first-child,td:first-child {
-border-left:none;
-}
-#sampleModalPopup {
-padding:20px;
 }
 </style>
 <body>
-<!-- <div class="openPopup">클릭하면 팝업이 나와요</div>    -->
+<div class="openPopup">클릭하면 팝업이 나와요</div>   
 <div id="popup01">
 
 
@@ -76,12 +62,19 @@ padding:20px;
     <div>
     
     <h2 align="center">메뉴 목록</h2>
-    
     <div align="right">
-    <div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="-1"></div>
+    <div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button> -->
+        </div>
+        <div class="modal-body">
+        </div>
+        <!-- <div class="modal-footer">
+            <button type="button" name="button" class="btn btn-color2" data-dismiss="modal" >닫기</button>
+        </div> -->
+    </div>
 </div>
-	
-	
     <table id="listTbl">
 	<thead>
 	<tr>
@@ -92,9 +85,7 @@ padding:20px;
 	</thead>
 	 <c:forEach items="${list}" var="list">
             <tr>
-            	<td align="center">
-            	<a href='project/manager/menu/viewMenu?MenuDetailCode=<c:out value="${list.menuDetailCode }"/>'>
-            	<c:out value="${list.codeName}"/></a></td>
+            	<td align="center"><c:out value="${list.codeName}"/></td>
                 <td align="center"><c:out value="${list.menuDetailCodeName}"/></td>
                 <td align="center"><c:out value="${list.menuContent}"/></td>
             </tr>
@@ -102,6 +93,8 @@ padding:20px;
 </table>
     </div>
 </div>
+
+
 </body>
 
 
@@ -112,29 +105,25 @@ padding:20px;
     $("body").append('<div class="backon"></div>');
     });
     
-    $("#popup01").show(); 
-    $("body").append('<div class="backon"></div>');
-    
     $("body").on("click", function(event) { 
         if(event.target.className == 'close' || event.target.className == 'backon'){
             $("#popup01").hide();
       	    $(".backon").hide();
         }
       });
-     var url = "http://localhost:8031/project/manager/menu/menuAdd";
+     var url = "http://localhost:8031/project/manager/menu/test2";
 	    
 	    // 팝업 호출
-	    $("#sampleModalPopup").load(url, function() { 
+	    $("#sampleModalPopup > .modal-dialog").load(url, function() { 
+	         
+	    
 	   });
     
 
   });
-  
- /*  function viewMenu() {
-	  var url="http://localhost:8031/project/manager/menu/viewMenu";
-	// 팝업 호출
-	    $("#sampleModalPopup").load(url, function() { 
-	   });
-  } */
+
+  function btn() {
+	 
+  }
 </script>
 </html>

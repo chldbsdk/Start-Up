@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -44,7 +44,7 @@ margin-top:10px;vertical-align:top;}
 
 #label { text-align:center; width:100px; height:20px;margin-top: 20px;  float:left;} 
 #label1 { text-align:center;width:100px;height:20px; margin-top: 20px;  float:left;} 
-/* #MenuImg {display:none;} */
+#MenuImg {display:none;}
 
 #labelImg{font-size: 2rem;text-align:center;width:100px;height:20px;margin-top: 20px;  float:left;cursor: pointer;}
 </style>
@@ -85,27 +85,31 @@ margin-top:10px;vertical-align:top;}
 
 		
 		<label for="MenuDetailCodeName" id="label"><b>메뉴명</b></label>
-		<input type="text" name="MenuDetailCodeName" id="MenuDetailCodeName" class="input" required>
+		<input type="text" name="MenuDetailCodeName" id="MenuDetailCodeName" class="input"
+		value='<c:out value="${menu.menuDetailCodeName}"/>' required>
 		<br>
 		
 		<label for="MenuPrice" id="label"><b>가격</b></label>
-		<input type="text" name="MenuPrice" id="MenuPrice" class="input" required>
+		<input type="text" name="MenuPrice" id="MenuPrice" class="input" 
+		value='<c:out value="${menu.menuPrice}"/>' required>
 		<br>
 		
 		<label for="MenuIngredients" id="label"><b>재료</b></label>
-		<input type="text" name="MenuIngredients" id="MenuIngredients" class="input" required>
+		<input type="text" name="MenuIngredients" id="MenuIngredients" class="input" 
+		value='<c:out value="${menu.menuIngredients}"/>' required>
 		<br>
 		<label for="MenuContent" id="label"><b>상세 내용</b></label>
-		<textarea id="MenuContent" name="MenuContent" cols="20" rows="20"></textarea>
+		<textarea id="MenuContent" name="MenuContent" cols="20" rows="20">
+		<c:out value="${menu.menuContent}"/></textarea>
 		<br>
 	
 		<label for="MenuAllergy" id="label"><b>알러지 정보</b></label>
-		<textarea id="MenuAllergy" name="MenuAllergy" cols="15" rows="20"></textarea>
+		<textarea id="MenuAllergy" name="MenuAllergy" cols="15" rows="20">
+		<c:out value="${menu.menuAllergy}"/></textarea>
 		<br>
 	
-		<!-- <label for="MenuImg" id="labelImg"><i class='fas fa-plus'></i></label> -->
-		
-		<input type="file" id="MenuImg" name="MenuImg" multiple/>
+		<label for="MenuImg" id="labelImg"><i class='fas fa-plus'></i></label>
+		<input type="file" id="MenuImg" name="MenuImg"/>
 		<!-- <button type="button" class="btn_img" onclick="imgupload()"><i class="fas fa-plus"></i></button> -->
 		<br>
 		

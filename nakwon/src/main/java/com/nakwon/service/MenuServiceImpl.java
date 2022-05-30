@@ -17,6 +17,11 @@ public class MenuServiceImpl implements MenuService{
 	}
 	
 	@Override
+	public MenuVO read(String MenuDetailCode) throws Exception {
+		return dao.read(MenuDetailCode);
+	}
+	
+	@Override
 	public List<MenuVO> menuListAll()throws Exception {
 		return dao.menuListAll();
 	}
@@ -24,5 +29,15 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public List<MenuVO> menuCodeListAll(String Code)throws Exception {
 		return dao.menuCodeListAll(Code);
+	}
+	
+	@Override
+	public List<MenuVO> menuCode(String MenuCode)throws Exception {
+		return dao.menuCode(MenuCode);
+	}
+	
+	@Override
+	public MenuVO test(String MenuCode) throws Exception{
+		return dao.test(MenuCode);
 	}
 }

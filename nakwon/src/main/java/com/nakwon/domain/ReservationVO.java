@@ -7,7 +7,7 @@ public class ReservationVO {
 	private String Phone;
 	private String Name;
 	private String Email;
-	private Timestamp RsvDate;
+	private Timestamp RsrvDate;
 	private int Pnum;
 	private String Message;
 	private String Code;
@@ -37,11 +37,11 @@ public class ReservationVO {
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public Timestamp getRsvDate() {
-		return RsvDate;
+	public Timestamp getRsrvDate() {
+		return RsrvDate;
 	}
-	public void setRsvDate(Timestamp rsvDate) {
-		RsvDate = rsvDate;
+	public void setRsrvDate(Timestamp rsrvDate) {
+		RsrvDate = rsrvDate;
 	}
 	public int getPnum() {
 		return Pnum;
@@ -70,7 +70,16 @@ public class ReservationVO {
 	@Override
 	public String toString() {
 		return "ReservationVO [RsrvCode=" + RsrvCode + ", Phone=" + Phone + ", Name=" + Name + ", Email=" + Email
-				+ ", RsvDate=" + RsvDate + ", Pnum=" + Pnum + ", Message=" + Message + ", Code=" + Code + ", MenuCode="
+				+ ", RsvDate=" + RsrvDate + ", Pnum=" + Pnum + ", Message=" + Message + ", Code=" + Code + ", MenuCode="
 				+ MenuCode + "]";
 	}
+	public ReservationVO() {
+		super();
+		/*
+		 * RsrvCode = rsrvCode; Phone = phone; Name = name; Email = email; RsvDate =
+		 * rsvDate; Pnum = pnum; Message = message; Code = code; MenuCode = menuCode;
+		 */
+	}
+	
+	
 }
