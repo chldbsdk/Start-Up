@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nakwon.mapper.IntroduceMapper">
+	<!-- 소개 등록 -->
+	<insert id="introduceinsert">
+		insert into Introduce (IntroTitle, IntroContent, IntroImg)
+		values (#{IntroTitle}, #{IntroContent}, #{IntroImg})
+	</insert>
+	
+	<select id="introduceListAll" resultType="com.nakwon.domain.IntroduceVO">
+	<![CDATA[
+	select *
+	from Introduce
+	]]>
+	</select>	
+</mapper>

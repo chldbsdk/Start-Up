@@ -3,10 +3,9 @@ package com.nakwon.web;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -17,21 +16,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nakwon.domain.IntroduceVO;
 import com.nakwon.domain.ManagerVO;
 import com.nakwon.domain.MenuVO;
-import com.nakwon.domain.ReservationVO;
+import com.nakwon.domain.ReservationConfirmVO;
+import com.nakwon.domain.ReservationHoldVO;
+import com.nakwon.service.IntroduceService;
 import com.nakwon.service.ManagerService;
 import com.nakwon.service.MenuService;
+import com.nakwon.service.ReservationConfirmService;
 import com.nakwon.service.ReservationHoldService;
+import java.util.Map;
 
 /**
  * Handles requests for the application home page.
@@ -49,6 +51,12 @@ public class HomeController {
 
 	@Inject
 	private ReservationHoldService reservationholdservice;
+	
+	@Inject
+	private IntroduceService introduceservice;
+	
+	@Inject
+	private ReservationConfirmService reservationconfirmservice;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -90,6 +98,58 @@ public class HomeController {
 
 		return "redirect:/managerMain"; // 성공 시 관리자 페이지로 이동
 	}
+	
+	// 관리자 페이지 mapping
+	@RequestMapping(value = "/managerMain", method = RequestMethod.GET)
+	public String managerMain(Locale locale, Model model) {
+		return "project/manager/managerMain";
+	}
+	
+	// 소개 등록
+	@RequestMapping(value = "/introducecheck", method = RequestMethod.POST)
+	public String managerMainIntroduceAddPOSTintroducecheck(IntroduceVO vo, Model model) throws Exception {
+		System.out.println("IntroduceInsert GET Called");
+		introduceservice.introduceinsert(vo);
+	    model.addAttribute("list", introduceservice.introduceListAll());
+	    return "redirect:/managerMain";
+	}
+	   
+	// 메뉴등록
+	@RequestMapping(value = "/menucheck", method = RequestMethod.POST)
+	public String managerMainMenuAddPOSTmenucheck(MenuVO vo, Model model) throws Exception {
+		System.out.println("ss GET Called");
+	    menuservice.insert(vo);
+	    model.addAttribute("list", menuservice.menuListAll());
+	    return "redirect:/managerMain";
+	}
+	
+	// 메뉴코스만찬 페이지 mapping
+	@RequestMapping(value = "/courseMenu", method = RequestMethod.GET)
+	public String menu(MenuVO vo, Model model, HttpServletRequest request) throws Exception {
+
+		ObjectMapper objm = new ObjectMapper();
+			
+		List<MenuVO> courselist=menuservice.courseCode();
+		String codeList = objm.writeValueAsString(courselist);
+		model.addAttribute("codeList",codeList);
+			
+//			logger.info("변경 전.........." + courselist);
+//			logger.info("변경 후.........." + codeList); 
+			
+		return "project/menu/courseMenu";
+	}
+		
+	// 메뉴세트정찬 페이지 mapping
+	@RequestMapping(value = "/setMenu", method = RequestMethod.GET)
+	public String menuSet(MenuVO vo, Model model, HttpServletRequest request) throws Exception {
+		ObjectMapper objm = new ObjectMapper();
+			
+		List setlist=menuservice.setCode();
+		String codeList = objm.writeValueAsString(setlist);
+		model.addAttribute("codeList",codeList);
+			
+		return "project/menu/setMenu";
+	}
 
 	// 메인 페이지 mapping
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -97,61 +157,6 @@ public class HomeController {
 		return "project/main/main";
 	}
 
-	// 관리자 페이지 mapping
-	@RequestMapping(value = "/managerMain", method = RequestMethod.GET)
-	public String managerMain(Locale locale, Model model) {
-
-		return "project/manager/managerMain";
-	}
-
-	//메뉴등록
-		@RequestMapping(value="/managerMain", method=RequestMethod.POST)
-		public String managerMainMenuAddPOST(MenuVO vo, Model model) throws Exception{
-			System.out.println("MenuVO GET Called");
-			/*
-			 * for(MultipartFile multipartFile : uploadFile) { logger.info("------------");
-			 * logger.info("Upload File Name: "+multipartFile.getOriginalFilename());
-			 * logger.info("Upload File Size: "+multipartFile.getSize()); }
-			 */
-			menuservice.insert(vo);
-			model.addAttribute("list", menuservice.menuListAll());
-			return "redirect:/managerMain";
-		}
-	
-		/*
-		 * // 메뉴 페이지 mapping
-		 * 
-		 * @RequestMapping(value = "/menu", method = RequestMethod.GET) public String
-		 * menu(MenuVO vo, Model model, HttpServletRequest request) throws Exception {
-		 * String code= request.getParameter("MenuCode"); System.out.println(code);
-		 * model.addAttribute("menu",menuservice.menuCode("VTtHRP"));
-		 * 
-		 * return "project/menu/menu"; }
-		 */
-	
-	// 메뉴코스만찬 페이지 mapping
-		@RequestMapping(value = "/menuCourse", method = RequestMethod.GET)
-		public String menu(MenuVO vo, Model model, HttpServletRequest request) throws Exception {
-			//String code= request.getParameter("MenuCode");
-//			List<MenuVO> list=new ArrayList<>();
-//			list=menuservice.menuListAll();
-//			String[] stringArr = list.toArray(new String[list.size()]);
-//			System.out.println(stringArr);
-			
-			model.addAttribute("VttHRP",menuservice.menuCode("VTtHRP"));
-			model.addAttribute("WajFEF",menuservice.menuCode("WajFEF"));
-			return "project/menu/menuCourse";
-		}
-		
-		// 메뉴세트정찬 페이지 mapping
-		@RequestMapping(value = "/menuSet", method = RequestMethod.GET)
-		public String menuSet(MenuVO vo, Model model, HttpServletRequest request) throws Exception {
-			model.addAttribute("jXe0p",menuservice.menuCode("4jXe0p"));
-			model.addAttribute("Wssiv1",menuservice.menuCode("Wssiv1"));
-			model.addAttribute("uzhV27",menuservice.menuCode("uzhV27"));
-			return "project/menu/menuSet";
-		}
-	
 	// 오시는길 mapping
 	@RequestMapping(value = "/location", method = RequestMethod.GET)
 	public String location() {
@@ -164,10 +169,90 @@ public class HomeController {
 		return "project/reservation/reservationMain";
 	}
 	
-	// 예약 조회 mapping
+	// 예약 조회 페이지 mapping
 	@RequestMapping(value = "/reservationCheck", method = RequestMethod.GET)
 	public String reservationCheck() {
 		return "project/reservation/reservationCheck";
+	}
+	
+	// 사용자 예약 조회 
+	@RequestMapping(value = "/reservationCheck", method = RequestMethod.POST)
+	public String ReservationCheckPOST(HttpServletRequest request, RedirectAttributes rttr, Model model) {
+		Map<String,String> ConfirmCheck = new HashMap<String, String>(); //예약 확정 테이블로 보낼 map
+		ConfirmCheck.put("RsrvCode", request.getParameter("rsrvCode")); 
+		ConfirmCheck.put("Name", request.getParameter("Name")); 
+		ConfirmCheck.put("Phone", request.getParameter("Phone"));
+		
+		Map<String,String> Check = new HashMap<String, String>(); //예약 보류 테이블로 보낼 map
+		Check.put("RsrvCode", request.getParameter("rsrvCode")); 
+		Check.put("Name", request.getParameter("Name")); 
+		Check.put("Phone", request.getParameter("Phone"));
+		
+		int result;
+		try {
+			//예약 조회 실행(확정 테이블)
+			ReservationConfirmVO confirmvo = reservationconfirmservice.userReservationCheck(ConfirmCheck);
+			if (confirmvo == null) { //확정테이블에 정보가 없는 경우
+				//예약 조회 실행(보류 테이블)
+				ReservationHoldVO holdvo = reservationholdservice.userReservationCheck(Check);
+				if (holdvo == null) { //보류테이블에 정보가 없는 경우
+					result = 0; //조회 실패
+					rttr.addFlashAttribute("result", result);
+					return "redirect:/reservationCheck";
+				}
+				else { //정보가 있으면 보류 테이블의 정보를 리다이렉트로 보냄.
+					result = 1; //조회 성공(보류 테이블)
+					rttr.addAttribute("Name", holdvo.getName()); 
+					rttr.addAttribute("Phone", holdvo.getPhone());
+					rttr.addAttribute("RsrvCode", holdvo.getRsrvCode());
+					rttr.addAttribute("Pnum", holdvo.getPnum());
+					rttr.addAttribute("RsrvDate", holdvo.getRsrvDate()); 
+					rttr.addAttribute("Message", holdvo.getMessage());
+					rttr.addAttribute("Code", holdvo.getCode()); //정찬/만찬
+					rttr.addAttribute("MenuCode", holdvo.getMenuCode()); //메뉴
+					rttr.addAttribute("result", result); //조회 결과
+				}
+			}
+			else { //정보가 있으면 확정 테이블의 정보를 리다이렉트로 보냄.
+				result = 2; //조회 성공(확정 테이블)
+				rttr.addAttribute("Name", confirmvo.getName()); 
+				rttr.addAttribute("Phone", confirmvo.getPhone());
+				rttr.addAttribute("RsrvCode", confirmvo.getRsrvCode());
+				rttr.addAttribute("Pnum", confirmvo.getPnum());
+				rttr.addAttribute("RsrvDate", confirmvo.getRsrvDate()); 
+				rttr.addAttribute("Message", confirmvo.getMessage());
+				rttr.addAttribute("Code", confirmvo.getCode()); //정찬/만찬
+				rttr.addAttribute("MenuCode", confirmvo.getMenuCode()); //메뉴
+				rttr.addAttribute("result", result); //조회 결과
+			}
+		} catch(Exception e) {
+			e.printStackTrace(); //에러일 경우 에러 코드 전송 400 
+			System.out.println("error"); 
+		}
+		return "redirect:/userReservationCheck"; //예약자 조회 페이지로 이동
+	}
+	
+	// 사용자 예약 조회 성공 페이지 mapping
+	@RequestMapping(value = "/userReservationCheck", method = RequestMethod.GET)
+	public String userReservationCheck(@RequestParam("Name") String Name, @RequestParam("Phone") String Phone, 
+				@RequestParam("Pnum") int Pnum, @RequestParam("Code") String Code, @RequestParam("RsrvDate") Timestamp RsrvDate,
+				@RequestParam("MenuCode") String MenuCode, @RequestParam("Message") String Message,
+				@RequestParam("RsrvCode") String RsrvCode, @RequestParam("result") int result, Locale locale, Model model) { 
+		try {
+			model.addAttribute("Name", Name);
+			model.addAttribute("Phone", Phone);
+			model.addAttribute("RsrvDate", RsrvDate);
+			model.addAttribute("Pnum", Pnum);
+			model.addAttribute("Code", Code);
+			model.addAttribute("MenuCode", MenuCode);
+			model.addAttribute("Message", Message);
+			model.addAttribute("RsrvCode", RsrvCode);
+			model.addAttribute("result", result);
+		}catch(Exception e) {
+			e.printStackTrace(); //에러일 경우 에러 코드 전송 400 
+			System.out.println("error");
+		}
+		return "project/reservation/userReservationCheck";
 	}
 
 	// 예약 페이지 mapping
@@ -189,7 +274,7 @@ public class HomeController {
 			//System.out.println("MenuVO2 POST2 Called");
 			//System.out.println(list); //select문 실행 결과(list값) 확인 
 			entity = new ResponseEntity<List<MenuVO>>(list, HttpStatus.OK);
-;		} catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace(); //에러일 경우 에러 코드 전송 400 
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
 			System.out.println("error"); 
@@ -200,8 +285,8 @@ public class HomeController {
 	// 예약 등록
 	@RequestMapping(value = "/reservation", method = RequestMethod.POST)
 	public String reservationAddPOST(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) throws Exception {
-		ReservationVO rsrv = new ReservationVO();
-		try {
+		ReservationHoldVO rsrv = new ReservationHoldVO();
+		//try {
 			rsrv.setRsrvCode(request.getParameter("rsrvCode"));
 			rsrv.setName(request.getParameter("name"));
 			rsrv.setPhone(request.getParameter("phone"));
@@ -220,11 +305,15 @@ public class HomeController {
 			
 			//예약등록 실행
 			reservationholdservice.insertReservationHold(rsrv);
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("error");
-			return "redirect:/reservationFail"; //실패 시 예약 실패 페이지로 이동
-		}
+		//} catch(Exception e) {
+			//e.printStackTrace();
+			//System.out.println("insert error");
+			//if(reservationholdservice.insertReservationHold(rsrv) != null) {
+			//	redirectAttributes.addFlashAttribute("result", result);
+			//}
+			
+			//return "redirect:/reservationSuccess"; //실패 시 alert창 띄우기
+		//}
 		try {
 			redirectAttributes.addAttribute("Name", rsrv.getName()); //redirecet할 곳에 파라미터 보내기, return할 때 ?로 같이 보내면 "--?--"로 mapping이 되어 에러가 남. 
 			redirectAttributes.addAttribute("RsrvDate", request.getParameter("rsrvDate"));
@@ -241,13 +330,7 @@ public class HomeController {
 		}
 		return "redirect:/reservationSuccess"; // 성공 시 예약 성공 페이지로 이동
 	}
-
-	// 메인1 페이지 mapping
-	@RequestMapping(value = "/Main1", method = RequestMethod.GET)
-	public String Main1() {
-		return "project/main/Main1";
-	}
-
+	
 	// 예약 등록 성공 페이지 mapping
 	@RequestMapping(value = "/reservationSuccess", method = RequestMethod.GET)
 	public String reservationSuccess(@RequestParam("Name") String Name, @RequestParam("RsrvDate") String RsrvDate,
@@ -255,7 +338,7 @@ public class HomeController {
 			@RequestParam("MenuCode") String MenuCode, @RequestParam("Message") String Message,
 			@RequestParam("CodeName") String CodeName, @RequestParam("MenuCodeName") String MenuCodeName,
 			@RequestParam("RsrvCode") String RsrvCode, Locale locale, Model model) { 
-			
+				
 		model.addAttribute("Name", Name);
 		model.addAttribute("RsrvDate", RsrvDate);
 		model.addAttribute("Pnum", Pnum);
@@ -267,19 +350,77 @@ public class HomeController {
 		model.addAttribute("MenuCodeName", MenuCodeName);
 		return "project/reservation/reservationSuccess";
 	}
+	
+	// 예약 삭제
+	@RequestMapping(value = "/removeReservation", method = RequestMethod.POST)
+	public String removeReservation(@RequestParam("RsrvCode") String RsrvCode, @RequestParam("Phone") String Phone,
+									@RequestParam("result") int result, RedirectAttributes rttr) throws Exception {
+		Map<String,String> DeleteInfo = new HashMap<String, String>(); //예약 확정 테이블로 보낼 map
+		DeleteInfo.put("RsrvCode", RsrvCode);
+		DeleteInfo.put("Phone", Phone);
+		
+		int deleteResult = 0;
+		try {
+			if(result == 2) { //확정 테이블에 있는 경우
+				//확정 테이블에서 예약 삭제
+				reservationconfirmservice.deleteReservationConfirm(DeleteInfo);
+				//보류 테이블에서 예약 삭제
+				reservationholdservice.deleteReservationHold(DeleteInfo);
+				
+				deleteResult = 1;
+				rttr.addFlashAttribute("deleteResult", deleteResult);
+			}else if(result == 1){ //보류 테이블에만 있는 경우
+				//보류 테이블에서 예약 삭제
+				reservationholdservice.deleteReservationHold(DeleteInfo);
+				
+				deleteResult = 1;
+				rttr.addFlashAttribute("deleteResult", deleteResult);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("delete error");
+		}
+		return "redirect:/rsrvDeleteSuccess";
+	}
+	
+	// 예약 삭제 확인 페이지 mapping
+	@RequestMapping(value = "/rsrvDeleteSuccess", method = RequestMethod.GET)
+	public String rsrvDeleteSuccess() throws Exception {
+		System.out.println("success");
+		return "project/reservation/rsrvDeleteSuccess";
+	}
+	
+	/*
+	 * @RequestMapping(value="/modifyReservation", method=RequestMethod.GET) public
+	 * void modifyReservationGET(String bno, Model model) throws Exception{
+	 * service.userReservationCheck(bno); model.addAttribute(service.read(bno)); }
+	 * 
+	 * @RequestMapping(value="/modifyReservation", method=RequestMethod.POST) public
+	 * String modifyPOST(boardVO board, RedirectAttributes rttr) throws Exception{
+	 * service.modify(board); System.out.println(board.getTitle());
+	 * rttr.addFlashAttribute("msg", "SUCCESS");
+	 * 
+	 * return "redirect:/board/listAll"; }
+	 */
+
+	// 메인1 페이지 mapping
+	@RequestMapping(value = "/Main1", method = RequestMethod.GET)
+	public String Main1() {
+		return "project/main/Main1";
+	}
 
 	// 예약 등록 실패 페이지 mapping
 	@RequestMapping(value = "/reservationFail", method = RequestMethod.GET)
-	public String reservationFail( Model model) throws Exception{
+	public String reservationFail(Model model) throws Exception {
 		try {
-			model.addAttribute("rsrvList",reservationholdservice.rsrvHoldListAll());
-		}catch(Exception e) {
+			model.addAttribute("rsrvList", reservationholdservice.rsrvHoldListAll()); //예약보류리스트 불러오기
+			System.out.println(reservationholdservice.rsrvHoldListAll().getClass().getSimpleName());
+		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("model error");
 		}
+		
 		return "project/reservation/reservationFail";
 	}
-	
-	
 
 }

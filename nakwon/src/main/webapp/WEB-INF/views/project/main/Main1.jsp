@@ -36,9 +36,9 @@
    /*배너*/
    * {margin:0;padding:0;}
    .section input[id*="slide"] {display:none;}
-   .section .slidewrap {max-width:1000px; position:relative; margin-top: 50px; margin-left: 800px;}
-   .section .slidelist {white-space:nowrap;font-size:0;overflow:hidden;position:relative;}
-   .section .slidelist > li {display:inline-block;vertical-align:middle;width:100%;transition:all .5s;}
+   .section .slidewrap {max-width:1000px; position:relative; margin-top: 50px; margin-left: 800px; overflow:hidden;}
+   .section .slidelist { white-space:nowrap; font-size:0; overflow:hidden; position:relative; }
+   .section .slidelist > li {display:inline-block;vertical-align:middle;width:1000px;transition:all .5s;}
    .section .slidelist > li > a {display:block;position:relative;}
    .section .slidelist > li > a img {width:100%;}
    .section .slidelist label {position:absolute;z-index:10;top:50%;transform:translateY(-50%);padding:50px;cursor:pointer;}
@@ -66,13 +66,12 @@
    .section input[id="slide02"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(2) > label {background:#999;}
    .section input[id="slide03"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(3) > label {background:#999;}
 </style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
-
 <body> 
 
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-   /*$(document).ready(function() {
+<script>
+   $(document).ready(function() {
       //사용할 배너
       var $banner = $(".slidewrap").find(".slidelist");
 
@@ -99,7 +98,7 @@
             //이 과정을 반복하면서 계속 롤링하는 배너를 만들 수 있다..
          });
       }
-   });*/
+   });
    
 </script>
 
@@ -120,7 +119,7 @@
    <div class="slidewrap">   
       <ul class="slidelist">
          <!-- 슬라이드 영역 -->
-          <li class="slideitem"><a><img src="resources/Main1img/Hanok.jpg"></a></li>
+         <li class="slideitem"><a><img src="resources/Main1img/Hanok.jpg"></a></li>
          <li class="slideitem"><a><img src="resources/Main1img/K-Food.jpg"></a></li>
          <li class="slideitem"><a><img src="resources/Main1img/Jangdokdae.jpg"></a></li> 
 

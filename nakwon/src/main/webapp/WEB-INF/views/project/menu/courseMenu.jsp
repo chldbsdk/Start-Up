@@ -29,7 +29,7 @@
 	#coursediv {margin:0 auto; width:1700px; height:500px; padding:50px 80px;}
 	
 	#coursetbl {padding:0 30px;width:800px;}
-	#coursetbl td {border-bottom:1px solid;}
+	#coursetbl td {border:1px solid;}
 					
 </style>
 </head>
@@ -39,21 +39,23 @@
 
 <nav id="nav" >
 	<ul>
-		<li><a href="#" onclick="location.href='http://localhost:8031/menuCourse'" id="ahrefcourse">만찬(풀코스)</a></li>
-		<li><a href="#" onclick="location.href='http://localhost:8031/menuSet'" id="ahref">정찬(세트)</a></li>
+		<li><a href="#" onclick="location.href='http://localhost:8031/courseMenu'" id="ahrefcourse">만찬(풀코스)</a></li>
+		<li><a href="#" onclick="location.href='http://localhost:8031/setMenu'" id="ahref">정찬(세트)</a></li>
 	</ul>
 </nav>
 
-<div>
+<%-- <div>
 	<div id="coursediv">
 	<img style="float:left;"src="resources/Main2img/코다리정식.png" width="800px" height="500px">
+	
+	<c:forEach items="${VttHRP}" var="VttHRP">
 	<table id="coursetbl">
 		<tr><td align="center"><h1>코스 A</h1><br></td></tr>
 		<tr>
 			<td><b>구성 : </b>
-				<c:forEach items="${VttHRP}" var="VttHRP">
+				
 				<c:out value="${VttHRP.menuDetailCodeName }"/>
-				</c:forEach>
+				
 				<br>
 			</td>
 		</tr>
@@ -78,6 +80,7 @@
 			</td>
 		</tr>
 	</table>
+	</c:forEach>
 	</div>
 	
 	<div id="coursediv">
@@ -114,6 +117,32 @@
 		</tr>
 	</table>
 	</div>
+</div> --%>
+<div>
+<div id="coursediv">
+	<img style="float:left;"src="resources/Main2img/코다리정식.png" width="800px" height="500px">
+<script>
+		
+		let codeList = JSON.parse('${codeList}');
+	
+		
+		for(let i = 1; i < codeList.length; i++){
+			document.write("<table id='coursetbl'>");
+			document.write("<tr>");
+			document.write("<td align='center'><h1>"+codeList[i].menuCodeName+"</h1></td></tr>");
+			document.write("<td><b>구성 : </b>"+codeList[i].menuDetailCodeName+"</td></tr>");
+			document.write("<tr>");
+			document.write("<td><b>가격 : </b>"+codeList[i].menuPrice+"</td></tr>");
+			document.write("<tr>");
+			document.write("<td><b>소개 : </b>"+codeList[i].menuContent+"</td></tr>");
+			document.write("<tr>");
+			document.write("<td><b>알러지 : </b>"+codeList[i].menuAllergy+"</td></tr>");
+			document.write("</table>");
+			
+		}	
+		
+</script>
+</div>
 </div>
 </body>
 </html>

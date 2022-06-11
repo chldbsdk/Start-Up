@@ -29,7 +29,7 @@
 	#setdiv {margin:0 auto; width:1700px; height:500px; padding:50px 80px;}
 	
 	#settbl {padding:0 30px;width:800px;}
-	#settbl td {border-bottom:1px solid;}
+	#settbl td {border:1px solid;}
 					
 </style>
 </head>
@@ -39,12 +39,12 @@
 
 <nav id="nav" >
 	<ul>
-		<li><a href="#" onclick="location.href='http://localhost:8031/menuCourse'" id="ahrefcourse">만찬(풀코스)</a></li>
-		<li><a href="#" onclick="location.href='http://localhost:8031/menuSet'" id="ahref">정찬(세트)</a></li>
+		<li><a href="#" onclick="location.href='http://localhost:8031/courseMenu'" id="ahrefcourse">만찬(풀코스)</a></li>
+		<li><a href="#" onclick="location.href='http://localhost:8031/setMenu'" id="ahref">정찬(세트)</a></li>
 	</ul>
 </nav>
 
-<div>
+<%-- <div>
 	<div id="setdiv">
 	<img style="float:left;"src="resources/Main2img/화랑부대찌개.png" width="800px" height="500px">
 	<table id="settbl">
@@ -114,6 +114,36 @@
 		</tr>
 	</table>
 	</div>
+</div> --%>
+<div>
+<div id="setdiv">
+	<img style="float:left;"src="resources/Main2img/화랑부대찌개.png" width="800px" height="500px">
+<script>
+		
+		let codeList = JSON.parse('${codeList}');
+
+		
+		for(let i = 1; i < codeList.length; i++){
+			
+			if(codeList[i].menuCode===codeList[i-1].menuCode) {
+				
+				document.write(","+codeList[i].menuDetailCodeName+"</td>");
+			}
+			else {
+				/* document.write(codeList[i-1].menuCodeName); */
+				/* document.write("<table id=t"+[i]+">"); */
+				document.write("<table id='settbl'");
+				document.write("<tr>");
+				document.write("<td align='center'><h1>"+codeList[i].menuCodeName+"</h1></td></tr>");
+				document.write("<td>"+codeList[i].menuDetailCodeName);
+
+				
+			}
+			
+		}	
+
+</script>
+</div>
 </div>
 </body>
 </html>

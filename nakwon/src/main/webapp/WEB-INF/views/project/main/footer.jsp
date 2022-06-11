@@ -1,4 +1,4 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
@@ -117,9 +117,9 @@ div.title{
       <div class="footer-content footer-content-right">
          <div class="title">대표</div>
          <ul class="text-wrap">
-            <li class="represent">정승경</li>
-            <li class="represent">이가온</li>
-            <li class="represent">최윤아</li>
+            <li class="represent" onClick="location.href='http://localhost:8031/login'">정승경</li>
+            <li class="represent" onClick="location.href='http://localhost:8031/login'">이가온</li>
+            <li class="represent" onClick="location.href='http://localhost:8031/login'">최윤아</li>
          </ul>
       </div>
    </div>

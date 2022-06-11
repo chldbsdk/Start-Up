@@ -50,7 +50,7 @@ margin-top:10px;vertical-align:top;}
 </style>
 
 <body class="menubody">
-<form class="menuAdd" id="menuAddform" name="menuAddform" method="post" accept-charset="utf-8">
+<form class="menuAdd" id="menuAddform" name="menuAddform" action="menucheck.do" method="post" accept-charset="utf-8">
 	<div class="wrap">
 		<!-- <a href="#add_menu" class="btn_add">메뉴 등록</a> 얘 없앨거임 -->
 		<button type="button" id="open" class="btn_add">메뉴 등록</button>

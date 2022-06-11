@@ -20,8 +20,17 @@
 .popup {border:1px solid #ccc;background:#fff;padding:50px;width:50%;position:fixed;top:20px;display:none}
 
 .popup .close {float:right} 
+
+ table{
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        td{
+            padding: 10px 20px;
+            border: 1px solid #000;
+        }
 </style>
-<body >
+<body id="body">
 <!-- Modal HTML embedded directly into document -->
 <div id="ex1" class="modal">
   <p>Thanks for clicking. That felt good.</p>
@@ -64,7 +73,7 @@
 
    <div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="-1"></div>
 
-<table>
+<%-- <table>
 
 
 	<thead>
@@ -84,7 +93,7 @@
                 <td><c:out value="${list.menuContent}"/></td>
             </tr>
 </c:forEach> 
-</table>
+</table> --%>
 <select id="MenuCodetest" name="MenuCodetest" onchange="fun()">
 						<option value="" selected>코스선택</option>
 						<c:forEach items="${list}" var="menu">
@@ -103,6 +112,102 @@
 		<label>
 		<input type="radio" id="set" name="Code" value="set" onchange="btn()">세트<br></label>
 		<input type="text" name="CodeName" id="CodeName"  value="" readonly="readonly">
+		
+		<div>
+		
+		<c:forEach items="${course}" var="course">
+      	<c:out value="${course.menuCode}"/>
+      	</c:forEach>
+		</div>
+		
+		<div>
+		
+	
+		<c:forEach items="${courseCode}" var="courseCode">
+		<c:out value="${courseCode.menuCodeName }"/>
+			<c:forEach items="${courseCode1 }" var="course" varStatus="status">
+				<%-- <c:out value="${course.menuDetailCodeName }"/> --%>
+				<c:out value="${status.index}" /> 
+			</c:forEach> 
+	<%-- 	<c:out value="${courseCode.menuCode }"/>
+
+	
+		
+		<c:out value="${courseCode.menuCode}"/>
+      	<c:out value="${courseCode.menuCodeName}"/> --%>
+      	</c:forEach>
+		
+		
+		</div>
+		
+		<%-- <div>
+		<c:forEach items="${courseCode}" var="courseCode">	
+	<table id="coursetbl">
+		<tr><td align="center"><h1><c:out value="${courseCode.menuCodeName }"/></h1><br></td></tr>
+		<tr>
+			<td><b>구성 : </b>
+				
+				
+				
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<c:set var="total" value="0"/>
+				<c:set var="total" value="${total+(courseCode.menuPrice) }"/>
+
+				<b>가격 : </b>${total}원
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p><b>소개 : </b>푸짐한 세트 A</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p><b>알러지 : </b>밀, 달걀, 땅콩, 생선, 콩</p>
+			</td>
+		</tr>
+	</table>
+	</c:forEach>
+		</div> --%>
+		<input type="text" name="test" id="test" value="">
+		<script>
+		
+		let codeList = JSON.parse('${codeList}');
+		
+		let cate1Array = new Array();
+		let cate1Obj = new Object();
+		
+		for(let i = 1; i < codeList.length; i++){
+			
+			if(codeList[i].menuCode!=codeList[i-1].menuCode) {
+				document.write("<table id='coursetbl'>");
+				document.write("<tr>");
+				document.write("<td align='center'><h1>"+codeList[i].menuCodeName+"</h1></td></tr>");
+				document.write("<td><b>구성 : </b>"+codeList[i].menuDetailCodeName);
+				
+				
+			}
+			else {
+				document.write(","+codeList[i].menuDetailCodeName+"</td>");
+				document.write("<tr>");
+				document.write("<td><b>가격 : </b>"+codeList[i].menuPrice+"</td></tr>");
+				document.write("<tr>");
+				document.write("<td><b>소개 : </b>"+codeList[i].menuContent+"</td></tr>");
+				document.write("<tr>");
+				document.write("<td><b>알러지 : </b>"+codeList[i].menuAllergy+"</td></tr>");
+				document.write("</table>");
+			}	
+		}	
+
+		$(document).ready(function(){
+			console.log(cate1Array);
+		});
+		</script>
 </body>
 <script>	
 

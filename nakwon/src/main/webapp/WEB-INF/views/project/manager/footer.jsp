@@ -6,30 +6,21 @@
 <meta charset="UTF-8">
 <title>manager footer</title>
 <style>
-	@font-face {
-    	font-family: 'Yeon Sung', cursive;
-   	 	src: url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap') ;
-   	 	font-weight: normal;
-    	font-style: normal;
-	}
-	
-	body {font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
-	
- 	 .jb-container {
+      .jb-container {
         height: 140px; line-height : 35px;
-        background-color: #A4A4A4;
+        background-color: #002238;
         display: flex;
       }
       .jb-item {
         padding: 20px;
       }
       .jb-item:nth-child(1) {
-        background-color: #A4A4A4; padding:10px; margin-top:45px; margin-left:90px;
-        color: #0D47A1; font-size: 65px;
+        background-color: #002238; padding:10px; margin-top:45px; margin-left:90px;
+        color: white; font-size: 65px;
       }
       .jb-item:nth-child(2) {
-        background-color: #A4A4A4; padding:10px; margin-top:20px; margin-left:10px;
-        color: #0D47A1; font-size: 18px;
+        background-color: #002238; padding:10px; margin-top:20px; margin-left:10px;
+        color: white; font-size: 18px;
       }   
 </style>
   </head>

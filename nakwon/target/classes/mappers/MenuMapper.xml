@@ -9,16 +9,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{Code}, #{CodeName}, #{MenuCode}, #{MenuCodeName}, #{MenuDetailCode}, #{MenuDetailCodeName}, #{MenuContent}, #{MenuImg}, #{MenuPrice}, #{MenuIngredients}, #{MenuAllergy})
 	</insert>
 	
-	<select id="read" resultType="MenuVO">
+	<select id="read" resultType="MenuVO"> <!-- 메뉴 조회할때 사용 -->
 	select * from Menu
 	where MenuDetailCode = #{MenuDetailCode}
 	</select>
 	
-	<select id="test" resultType="MenuVO">
-	select * from Menu
-	where MenuCode = #{MenuCode}
-	</select>
-	
+	<update id="update"> <!-- 메뉴 수정 -->
+ 	update Menu set Code =#{Code},  CodeName=#{CodeName},MenuCode=#{MenuCode},MenuCodeName=#{MenuCodeName},
+ 	MenuDetailCodeName=#{MenuDetailCodeName},MenuContent=#{MenuContent},MenuImg=#{MenuImg},MenuPrice=#{MenuPrice},
+ 	MenuIngredients=#{MenuIngredients}, MenuAllergy=#{MenuAllergy}
+	where MenuDetailCode = #{MenuDetailCode}
+ 	</update>
+ 	
 	<select id="menuListAll" resultType="com.nakwon.domain.MenuVO">
 	<![CDATA[
 	select *
@@ -33,22 +35,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where Code = #{Code}
 	]]>
 	</select>
-	
-	<select id="menuCode" parameterType="String" resultType="com.nakwon.domain.MenuVO">
-	<![CDATA[
-	select *
-	from Menu
-	where MenuCode = #{MenuCode}
-	]]>
-	</select>
-	
-	<select id="courseClassification" resultType="String">
-	select MenuCode from Menu
+		
+	<select id="courseClassification" resultType="MenuVO"> <!-- 만찬 메뉴 정보 뽑기 -->
+	select * from Menu
 	where Code="course"
 	</select>
 	
-	<select id="setClassification" resultType="String">
-	select MenuCode from Menu
+	<select id="setClassification" resultType="MenuVO"> <!-- 정찬 메뉴 정보 뽑기 -->
+	select * from Menu
 	where Code="set"
 	</select>
+	
+	<select id="distinctMenuCode" resultType="MenuVO">  <!-- menucode중복제거 -->
+	<![CDATA[
+	select distinct MenuCode,MenuCodeName
+	from Menu
+	]]>
+	</select>
+	
+	<select id="listCriteria" resultType="MenuVO">
+	<![CDATA[ 
+	select * 
+	from Menu
+	order by MenuCode limit #{pageStart}, #{perPageNum} 
+	]]>
+	</select>
+	
+	<select id="countPaging" resultType="int">
+	<![CDATA[
+ 	select count(MenuCode) 
+ 	from Menu 
+ 	where MenuCode > 0 
+ 	]]>
+ 	</select>
+	
 </mapper>

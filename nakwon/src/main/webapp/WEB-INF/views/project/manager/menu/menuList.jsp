@@ -65,6 +65,7 @@ border-left:none;
 #sampleModalPopup {
 padding:20px;
 }
+.paging-wrap { text-align: center; }
 </style>
 <body>
 <!-- <div class="openPopup">클릭하면 팝업이 나와요</div>    -->
@@ -79,7 +80,7 @@ padding:20px;
     
     <div align="right">
     <div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="-1"></div>
-</div>
+	</div>
 	
 	
     <table id="listTbl">
@@ -100,16 +101,36 @@ padding:20px;
             </tr>
 </c:forEach> 
 </table>
+
+<div class="paging-wrap">
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev}"> <!-- 시작 페이지가 1이 아니라면 이전버튼 생성 -->
+			<!-- &laquosms 특수문자 << -->
+				<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="index">
+				<li
+					<c:out value="${pageMaker.cri.page == index?'class =active':''}"/>>
+						<a href="${index}">${index}</a>
+					</li>
+			</c:forEach>
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
+			</c:if>
+		</ul>
+	</div>
+	
     </div>
 </div>
+
 </body>
 
 
 <script>
   $(document).ready(function( $ ){     
     $(".openPopup").on("click", function(event) { 
-    $("#popup01").show();  
-    $("body").append('<div class="backon"></div>');
+    	$("#popup01").show();  
+    	$("body").append('<div class="backon"></div>');
     });
     
     $("#popup01").show(); 
@@ -120,13 +141,12 @@ padding:20px;
             $("#popup01").hide();
       	    $(".backon").hide();
         }
-      });
-     var url = "http://localhost:8031/project/manager/menu/menuAdd";
-	    
-	    // 팝업 호출
-	    $("#sampleModalPopup").load(url, function() { 
-	   });
-    
+     });
+     
+    var url = "http://localhost:8031/project/manager/menu/menuAdd";    
+	// 팝업 호출
+	$("#sampleModalPopup").load(url, function() { 
+	});
 
   });
   

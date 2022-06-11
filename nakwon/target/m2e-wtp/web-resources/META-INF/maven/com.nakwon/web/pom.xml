@@ -179,6 +179,13 @@
         	<version>1.18.0</version>
         	<scope>provided</scope>
         </dependency> -->
+        
+        <dependency>
+        <groupId>jstl</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+        </dependency>
+
 	</dependencies>
     <build>
         <plugins>

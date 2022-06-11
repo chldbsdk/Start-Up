@@ -1,8 +1,9 @@
+
 package com.nakwon.domain;
 
 import java.sql.Timestamp;
 
-public class ReservationVO {
+public class ReservationHoldVO {
 	private String RsrvCode;
 	private String Phone;
 	private String Name;
@@ -73,7 +74,7 @@ public class ReservationVO {
 				+ ", RsvDate=" + RsrvDate + ", Pnum=" + Pnum + ", Message=" + Message + ", Code=" + Code + ", MenuCode="
 				+ MenuCode + "]";
 	}
-	public ReservationVO() {
+	public ReservationHoldVO() {
 		super();
 		/*
 		 * RsrvCode = rsrvCode; Phone = phone; Name = name; Email = email; RsvDate =

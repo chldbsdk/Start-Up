@@ -50,10 +50,10 @@ margin-top:10px;vertical-align:top;}
 </style>
 
 <body class="menubody">
-<form class="menuAdd" id="menuAddform" name="menuAddform" method="post" accept-charset="utf-8">
+<form class="menuAdd" id="menuAddform" name="menuAddform" action="menumodify.do"method="post" accept-charset="utf-8">
 	<div class="wrap">
 		<!-- <a href="#add_menu" class="btn_add">메뉴 등록</a> 얘 없앨거임 -->
-		<button type="button" id="open" class="btn_add">메뉴 등록</button>
+		<!-- <button type="button" id="open" class="btn_add">메뉴 등록</button> -->
 		<div id="add_menu" class="menu" style="display:none;">
 	
 		<div class="inner">
@@ -62,7 +62,8 @@ margin-top:10px;vertical-align:top;}
 		<h2 style="float:center;">메뉴 등록</h2>
 		
 		<div class="radio">
-			<label><input type="radio" id="course" name="Code" value="course" onchange="radiochk()">만찬</label>
+			<label><input type="radio" id="course" name="Code" value="course" onchange="radiochk()"
+			<c:if test="${menu.code eq 'course' }">checked</c:if> />만찬</label>
 			<label><input type="radio" id="set" name="Code" value="set" onchange="radiochk()" >정찬<br></label>
 		</div>
 
@@ -71,17 +72,21 @@ margin-top:10px;vertical-align:top;}
 		<br>
 		
 		<select id="MenuCodeSelect" name="MenuCodeSelect" onchange="selectfunction()" required>
-						<option value="" selected>코스선택</option>
-						<c:forEach items="${list}" var="menu">
-						<option value="${menu.menuCodeName}">${menu.menuCode}</option>
+						<option value="">코스선택</option>
+						
+						<c:forEach items="${list}" var="list">
+						<option value="${list.menuCodeName}">${list.menuCode}</option>
 						</c:forEach>
+						<option value="" selected><c:out value="${menu.menuCode}"/></option>
 						<option value="newCode">자동 생성</option>
 		</select>
 		<input type="hidden" id="MenuCode" name="MenuCode" value="" readonly="readonly">
-		<input type="text" name="MenuCodeName" id="MenuCodeName" readonly="readonly">
+		<input type="text" name="MenuCodeName" id="MenuCodeName" 
+		value='<c:out value="${menu.menuCodeName}"/>' readonly="readonly">
 		<br>
 		
-		<input type="hidden" name="MenuDetailCode" id="MenuDetailCode" class="input" value="" required>
+		<input type="hidden" name="MenuDetailCode" id="MenuDetailCode" class="input" 
+		value='<c:out value="${menu.menuDetailCode}"/>' required>
 
 		
 		<label for="MenuDetailCodeName" id="label"><b>메뉴명</b></label>
@@ -113,7 +118,7 @@ margin-top:10px;vertical-align:top;}
 		<!-- <button type="button" class="btn_img" onclick="imgupload()"><i class="fas fa-plus"></i></button> -->
 		<br>
 		
-		<button type="button" class="btn_next" onclick="AddBtn()">등록</button>
+		<button type="button" class="btn_next" onclick="modifyBtn()">수정</button>
 		
 		</div>
 		</div>
@@ -122,9 +127,10 @@ margin-top:10px;vertical-align:top;}
 
 <script>	
 $(document).ready(function() {
-	$("#open").click(function() {
+	/* $("#open").click(function() {
 		$("#add_menu").show();
-	});
+	}); */
+	$("#add_menu").show();
 });
 	var target=document.querySelectorAll('.btn_add');
 	var targetID;
@@ -143,7 +149,7 @@ $(document).ready(function() {
 	  });
 	}
 	
-	function AddBtn() {
+	function modifyBtn() {
 		if(document.menuAddform.MenuDetailCodeName.value=="") {
 			alert("메뉴명을 입력해주세요.");
 			document.menuAddform.MenuDetailCodeName.focus();

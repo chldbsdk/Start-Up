@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nakwon.mapper.ReservationConfirmMapper">
+	<!-- 예약 조회, 예약 수정시 띄우기 -->
+	<select id="userReservationCheck" parameterType="Map" resultType="com.nakwon.domain.ReservationConfirmVO">
+		select * 
+		from ReservationConfirm 
+		where RsrvCode=#{RsrvCode} and Name=#{Name} and Phone=#{Phone}
+	</select>
+	
+	<!-- 예약 삭제 -->
+	<delete id="deleteReservationConfirm" parameterType="Map">
+		delete from ReservationConfirm where RsrvCode = #{RsrvCode} and Phone = #{Phone}
+	</delete>
+	
+</mapper>
