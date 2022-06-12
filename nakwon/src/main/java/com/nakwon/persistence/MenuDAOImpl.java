@@ -40,29 +40,28 @@ public class MenuDAOImpl implements MenuDAO{
 	}
 	
 	@Override
-	public List<MenuVO> courseCode() throws Exception { //ë§Œì°¬ ë©”ë‰´ë“¤ ì •ë³´ ë½‘ê¸°
+	public List<MenuVO> courseCode() throws Exception { //¸¸Âù ¸Þ´ºµé Á¤º¸ »Ì±â
 		return sqlSession.selectList(namespace+".courseClassification"); 
 	}
 	
 	@Override
-	public List<MenuVO> setCode() throws Exception { //ì •ì°¬ ë©”ë‰´ë“¤ ì •ë³´ ë½‘ê¸°
+	public List<MenuVO> setCode() throws Exception { //Á¤Âù ¸Þ´ºµé Á¤º¸ »Ì±â
 		return sqlSession.selectList(namespace+".setClassification");
 	}
 	
 	@Override
-	public List<MenuVO> distinctMenuCode() throws Exception { //ë©”ë‰´ ì½”ë“œ ì¤‘ë³µì œê±°
+	public List<MenuVO> distinctMenuCode() throws Exception { //¸Þ´º ÄÚµå Áßº¹Á¦°Å
 		return sqlSession.selectList(namespace+".distinctMenuCode");
 	}
 	
+	//ÆäÀÌÂ¡ºÎºÐ
 	@Override
-	  public List<MenuVO> listCriteria(Criteria cri) throws Exception {
+	public List<MenuVO> listCriteria(Criteria cri) throws Exception {
+		return sqlSession.selectList(namespace + ".listCriteria", cri);
+	}
 
-	    return sqlSession.selectList(namespace + ".listCriteria", cri);
-	  }
-
-	  @Override
-	  public int countPaging(Criteria cri) throws Exception {
-
+	@Override
+	public int listCountPaging(Criteria cri) throws Exception {
 	    return sqlSession.selectOne(namespace + ".countPaging", cri);
-	  }
+	}
 }

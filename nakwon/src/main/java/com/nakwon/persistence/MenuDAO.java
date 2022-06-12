@@ -15,13 +15,14 @@ public interface MenuDAO {
 	
 	public List<MenuVO> menuCodeListAll(String Code) throws Exception;	
 
-	public List<MenuVO> courseCode() throws Exception; //ë§Œì°¬ ë©”ë‰´ ë½‘ê¸°
+	public List<MenuVO> courseCode() throws Exception; //¸¸Âù ¸Þ´º »Ì±â
 	
-	public List<MenuVO> setCode() throws Exception; //ì •ì°¬ ë©”ë‰´ ë½‘ê¸°
+	public List<MenuVO> setCode() throws Exception; //Á¤Âù ¸Þ´º »Ì±â
 	
-	public List<MenuVO> distinctMenuCode() throws Exception; //ë©”ë‰´ì½”ë“œ ì¤‘ë³µì œê±°
+	public List<MenuVO> distinctMenuCode() throws Exception; //¸Þ´ºÄÚµå Áßº¹Á¦°Å
 	
+	//ÆäÀÌÂ¡ºÎºÐ
 	public List<MenuVO> listCriteria(Criteria cri) throws Exception;
 	
-	public int countPaging(Criteria cri) throws Exception;
+	public int listCountPaging(Criteria cri) throws Exception;
 }

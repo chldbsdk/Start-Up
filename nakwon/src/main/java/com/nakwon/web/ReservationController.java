@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.nakwon.domain.Criteria;
 import com.nakwon.domain.PageMaker;
 import com.nakwon.domain.ReservationHoldVO;
@@ -19,7 +18,7 @@ public class ReservationController {
 	@Inject
 	private ReservationHoldService reservationholdservice;
 	
-	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	//¿¹¾à ¸ñ·Ï
 	@RequestMapping(value="/reservationList", method=RequestMethod.GET)
 	public void menuList(@ModelAttribute("cri") Criteria cri, ReservationHoldVO vo, Model model) throws Exception{
 		 System.out.println(cri.toString());
@@ -37,5 +36,16 @@ public class ReservationController {
 		reservationholdservice.insertReservationHold(vo);
 		model.addAttribute("list", reservationholdservice.rsrvHoldListAll());
 				
+	}
+	
+	@RequestMapping(value="/ReservationAdd", method=RequestMethod.GET)
+	public void reservationAddGET(ReservationHoldVO vo, Model model) throws Exception{
+		System.out.println("ReservationAdd GET Called");
+	}	
+	
+	@RequestMapping(value="/ReservationAdd", method=RequestMethod.POST)
+	public void introduceAddPOST(ReservationHoldVO vo, Model model) throws Exception {
+		System.out.println("ReservationAdd POST Called");
+		//introduceservice.introduceinsert(vo);
 	}
 }

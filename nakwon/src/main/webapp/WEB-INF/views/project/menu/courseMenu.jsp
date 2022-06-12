@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
@@ -26,11 +26,12 @@
 	
 	#nav #ahref:hover {color:#f4ae34;}
 	
-	#coursediv {margin:0 auto; width:1700px; height:500px; padding:50px 80px;}
+	
+	#coursediv {margin:0 auto; width:1700px; height:500px; padding:110px;}
 	
 	#coursetbl {padding:0 30px;width:800px;}
-	#coursetbl td {border:1px solid;}
-					
+	/* #coursetbl td {border:1px solid;} */
+	.BigTitle { font-weight: bold;font-size: 40px;margin-top: 20px;}			
 </style>
 </head>
 
@@ -44,106 +45,31 @@
 	</ul>
 </nav>
 
-<%-- <div>
-	<div id="coursediv">
-	<img style="float:left;"src="resources/Main2img/코다리정식.png" width="800px" height="500px">
-	
-	<c:forEach items="${VttHRP}" var="VttHRP">
-	<table id="coursetbl">
-		<tr><td align="center"><h1>코스 A</h1><br></td></tr>
-		<tr>
-			<td><b>구성 : </b>
-				
-				<c:out value="${VttHRP.menuDetailCodeName }"/>
-				
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<c:set var="total" value="0"/>
-				<c:forEach items="${VttHRP }" var="VttHRP">
-				<c:set var="total" value="${total+(VttHRP.menuPrice) }"/>
-				</c:forEach>
-				<b>가격 : </b>${total}원
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p><b>소개 : </b>푸짐한 세트 A</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p><b>알러지 : </b>밀, 달걀, 땅콩, 생선, 콩</p>
-			</td>
-		</tr>
-	</table>
-	</c:forEach>
-	</div>
-	
-	<div id="coursediv">
-	<img style="float:left;"src="resources/Main2img/코다리정식.png" width="800px" height="500px">
-	<table id="coursetbl">
-		<tr><td align="center"><h1>코스 B</h1><br></td></tr>
-		<tr>
-			<td><b>구성 : </b>
-				<c:forEach items="${WajFEF}" var="WajFEF">
-				<c:out value="${WajFEF.menuDetailCodeName }"/>
-				</c:forEach>
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<c:set var="total" value="0"/>
-				<c:forEach items="${WajFEF }" var="WajFEF">
-				<c:set var="total" value="${total+(WajFEF.menuPrice) }"/>
-				</c:forEach>
-				<b>가격 : </b>${total}원
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p><b>소개 : </b>다양한 상차림 세트 B</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p><b>알러지 : </b>밀, 달걀, 땅콩, 생선, 콩</p>
-			</td>
-		</tr>
-	</table>
-	</div>
-</div> --%>
 <div>
-<div id="coursediv">
-	<img style="float:left;"src="resources/Main2img/코다리정식.png" width="800px" height="500px">
-<script>
-		
+	<div>
+	<script>
 		let codeList = JSON.parse('${codeList}');
 	
-		
-		for(let i = 1; i < codeList.length; i++){
+		for(let i = 0; i < codeList.length; i++){
+			document.write("<div id='coursediv'>");
+			document.write("<img style='float:left;' src='resources/Main2img/코다리정식.png' width='900px' height='600px'>");
 			document.write("<table id='coursetbl'>");
 			document.write("<tr>");
-			document.write("<td align='center'><h1>"+codeList[i].menuCodeName+"</h1></td></tr>");
-			document.write("<td><b>구성 : </b>"+codeList[i].menuDetailCodeName+"</td></tr>");
+			document.write("<td class='BigTitle' align='center'>"+codeList[i].menuCodeName+"</td></tr>");
+			document.write("<td><h2>◈ 구성</h2>: "+codeList[i].menuDetailCodeName+"</td></tr>");
 			document.write("<tr>");
-			document.write("<td><b>가격 : </b>"+codeList[i].menuPrice+"</td></tr>");
+			document.write("<td><h2>◈ 가격</h2>: "+codeList[i].menuPrice+"</td></tr>");
 			document.write("<tr>");
-			document.write("<td><b>소개 : </b>"+codeList[i].menuContent+"</td></tr>");
+			document.write("<td><h2>◈ 소개</h2>: "+codeList[i].menuContent+"</td></tr>");
 			document.write("<tr>");
-			document.write("<td><b>알러지 : </b>"+codeList[i].menuAllergy+"</td></tr>");
+			document.write("<td><h2>◈ 알러지</h2>: "+codeList[i].menuAllergy+"</td></tr>");
 			document.write("</table>");
-			
+			document.write("</div>");
 		}	
-		
-</script>
+	</script>
+	</div>
 </div>
-</div>
+<footer><%@ include file="../main/footer.jsp" %></footer>
 </body>
 </html>
 

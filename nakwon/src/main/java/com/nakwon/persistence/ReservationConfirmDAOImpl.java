@@ -22,4 +22,9 @@ public class ReservationConfirmDAOImpl implements ReservationConfirmDAO{
 	public void deleteReservationConfirm(Map<String,String> DeleteInfo)throws Exception {
 		sqlSession.delete(namespace+".deleteReservationConfirm", DeleteInfo);
 	}
+	
+	@Override
+	public void modifyReservationConfirm(ReservationConfirmVO vo) throws Exception { //예약 수정
+		sqlSession.update(namespace + ".modifyReservationConfirm", vo);
+	}
 }

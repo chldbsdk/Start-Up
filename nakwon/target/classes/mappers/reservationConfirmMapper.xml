@@ -16,4 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from ReservationConfirm where RsrvCode = #{RsrvCode} and Phone = #{Phone}
 	</delete>
 	
+	<!-- 예약 수정: 예약코드가 일치하는 vo 수정 -->
+ 	<update id="modifyReservationConfirm">
+ 	update ReservationConfirm set Phone =#{Phone}, Name =#{Name}, Email =#{Email}, RsrvDate =#{RsrvDate},
+ 	Pnum =#{Pnum}, Message =#{Message}, Code =#{Code}, MenuCode =#{MenuCode}, MenuCodeName =#{MenuCodeName}
+ 	where RsrvCode = #{RsrvCode}
+ 	</update>
+	
 </mapper>

@@ -5,9 +5,9 @@ import java.util.Map;
 import com.nakwon.domain.ReservationHoldVO;
 
 public interface ReservationHoldDAO {
-	public void insertReservationHold(ReservationHoldVO vo)  throws Exception; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	public void insertReservationHold(ReservationHoldVO vo)  throws Exception; //¿¹¾à µî·Ï
 	
-	public List<ReservationHoldVO> rsrvHoldListAll() throws Exception; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public List<ReservationHoldVO> rsrvHoldListAll() throws Exception; //¿¹¾à ¸®½ºÆ® °¡Á®¿À±â
 	
 	public int listCountPaging(com.nakwon.domain.Criteria cri) throws Exception;
 	
@@ -16,4 +16,6 @@ public interface ReservationHoldDAO {
 	public ReservationHoldVO userReservationCheck(Map<String,String> Check) throws Exception;
 	
 	public void deleteReservationHold(Map<String,String> DeleteInfo) throws Exception;
+	
+	public void modifyReservationHold(ReservationHoldVO vo) throws Exception; //¿¹¾à ¼öÁ¤
 }

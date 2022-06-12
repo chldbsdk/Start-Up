@@ -13,18 +13,25 @@
     <title>Document</title>
 </head>
 <style>
+@font-face {
+    font-family: 'Yeon Sung', cursive;
+    src: url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap') ;
+    font-weight: normal;
+    font-style: normal;
+}
+body {font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
 #popup01{
 vertical-align:middle;
-display: none;
-width:800px;
-height:800px;
-position: absolute;
-top:30%;
-left: 43%;
-margin: -250px 0 0 -250px;
-background-color: #fff;
-z-index: 2;
-overflow:auto;/*스크롷ㄹ*/
+	display: none;
+	width:800px;
+	height:800px;
+	position: absolute;
+	top:30%;
+	left: 43%;
+	margin: -250px 0 0 -250px;
+	background-color: #fff;
+	z-index: 2;
+	overflow:auto;/*스크롤*/
     }
 .backon{
     content: "";
@@ -34,7 +41,6 @@ overflow:auto;/*스크롷ㄹ*/
     position: fixed;
     top: 0;
     left: 0;
-    /* z-index: 1; */
 }
 .close{
   position:absolute;
@@ -42,42 +48,100 @@ overflow:auto;/*스크롷ㄹ*/
   right: 0;
   cursor:pointer;
 }
-.openPopup{
-  cursor:pointer;
-}
-#addButton {
-align:right;
+.openPopup{ cursor:pointer;}
+#addButton {align:right;}
+.BigTitle { 
+	font-weight: bold;
+	font-size: 30px;
+	margin-top: 20px;
 }
 #listTbl {
 margin: 0 auto;
-border-top: 1px solid #444444;
-border-collapse: collapse;
-width:800px;
+	border-collapse: collapse;
+	width: 780px;
+	margin-top: 20px;
 }
 #listTbl th,td {
-border-bottom: 1px solid #444444;
-border-left: 1px solid #444444;
-padding: 10px;
+	border-top: 1px solid #444444;
+	border-bottom: 1px solid #444444;
+	border-left: 1px solid #444444;
+	border-right: 1px solid #444444;
+	padding: 10px;
 }
-#listTbl th:first-child,td:first-child {
-border-left:none;
+#listTbl th:first-child,td:first-child { border-left:none; }
+#listTbl th:first-child { 
+	border-bottom:none; 
+	border-top: none;
+	width: 50px;
 }
+
 #sampleModalPopup {
 padding:20px;
+}
+.selectbox {
+	text-align: center;
+	margin-top: 50px;
+}
+#searchSelect { 
+	width: 100px; 
+	height: 30px;
+}
+#keyword { 
+	width: 400px; 
+	height: 25px;
+}
+.btn_search { 
+	width: 35px;
+	height: 30px;
+	color: white;
+	background-color: #002238;
+	border-radius: 5px;
+}
+.btn_search:hover {
+		color: #002238;
+		background-color: white;
+}
+.checkboxborder {
+	border-left: none;
+	border-top: none;
+	border-bottom: none;
+}
+li {
+	list-style: none;
+	display: inline-block;
+}
+li a {
+	color: black;
+	border-radius: 5px;
+	background-color: #fafafa;
+	border-color: black;
+	display: block;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
 }
 .paging-wrap { text-align: center; }
 </style>
 <body>
 <!-- <div class="openPopup">클릭하면 팝업이 나와요</div>    -->
 <div id="popup01">
-
-
-
     <div class="close">close</div>
-    <div>
+    <div class="menulist">
+    <button type="button" class="btn_close" ><i class="fa fa-close"></i></button>
+    <div class="BigTitle" align="center">메뉴 목록</div>
     
-    <h2 align="center">메뉴 목록</h2>
-    
+    <div class="selectbox">
+		<select id="searchSelect" name="searchSelect" onchange="" required>
+						<option value="" selected>검색 기준</option>
+						<option value="rsrvDate">메뉴명</option>
+						<!-- <option value="name">예약자</option> -->
+		</select>
+		
+		<input type="text" id="keyword" name="keyword">
+		<button type="button" class="btn_search" ><i class="fa fa-search"></i></button>
+	
+	</div>
+	
     <div align="right">
     <div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="-1"></div>
 	</div>
@@ -86,6 +150,7 @@ padding:20px;
     <table id="listTbl">
 	<thead>
 	<tr>
+	<th class="checkboxborder"><input type="checkbox" name="allCheck" id="allCheck"><label for="allCheck"> All</label></th>
 	<th>만찬/정판</th>
 	<th>메뉴명</th>
 	<th>내용</th>
@@ -93,6 +158,7 @@ padding:20px;
 	</thead>
 	 <c:forEach items="${list}" var="list">
             <tr>
+            <td align="center" class="checkboxborder"><input type="checkbox" name="chBox" class="chBox" value="${list.menuDetailCode }"></td>
             	<td align="center">
             	<a href='project/manager/menu/viewMenu?MenuDetailCode=<c:out value="${list.menuDetailCode }"/>'>
             	<c:out value="${list.codeName}"/></a></td>
@@ -122,12 +188,16 @@ padding:20px;
 	
     </div>
 </div>
-
+<form id="jobForm">
+  <input type='hidden' name="page" value="${pageMaker.cri.perPageNum}">
+  <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}">
+</form>
 </body>
 
 
 <script>
-  $(document).ready(function( $ ){     
+  $(document).ready(function( $ ){   
+	  
     $(".openPopup").on("click", function(event) { 
     	$("#popup01").show();  
     	$("body").append('<div class="backon"></div>');
@@ -145,16 +215,43 @@ padding:20px;
      
     var url = "http://localhost:8031/project/manager/menu/menuAdd";    
 	// 팝업 호출
-	$("#sampleModalPopup").load(url, function() { 
-	});
+	$("#sampleModalPopup").load(url, function() { });
 
   });
   
- /*  function viewMenu() {
-	  var url="http://localhost:8031/project/manager/menu/viewMenu";
-	// 팝업 호출
-	    $("#sampleModalPopup").load(url, function() { 
-	   });
-  } */
+  	var target=document.querySelectorAll('.menulist');
+	var targetID;
+	var btnPopClose = document.querySelectorAll('.btn_close');
+	// 팝업 닫기
+	for(var j = 0; j < target.length; j++){
+		btnPopClose[j].addEventListener('click', function(){
+		this.parentNode.parentNode.style.display = 'none';
+		$(".backon").hide();
+		});
+	}     
+
+
+//All 눌렀을 경우
+$("#allCheck").click(function(){
+	var chk = $("#allCheck").prop("checked"); //prop("property name"): 속성 값을 가져옴
+	if(chk) { //All이 checked인 경우 
+		$(".chBox").prop("checked", true); //checked 속성을 true로 변경 -> 체크박스 체크
+	} else{
+		$(".chBox").prop("checked", false); //체크박스 체크 x
+	}
+});
+
+$(".pagination li a").on("click", function(event){
+	
+	event.preventDefault(); 
+	
+	var targetPage = $(this).attr("href");
+	
+	var jobForm = $("#jobForm");
+	jobForm.find("[name='page']").val(targetPage);
+	jobForm.attr("action","/project/manager/menu/menuList").attr("method", "get");
+	jobForm.submit();
+});
+
 </script>
 </html>

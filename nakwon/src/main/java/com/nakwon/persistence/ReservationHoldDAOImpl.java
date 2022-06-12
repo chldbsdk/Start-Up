@@ -14,19 +14,19 @@ public class ReservationHoldDAOImpl implements ReservationHoldDAO{
 	private SqlSession sqlSession;
 	private static final String namespace = "com.nakwon.mapper.ReservationHoldMapper";
 	
-	//ì˜ˆì•½ ë“±ë¡
+	//¿¹¾à µî·Ï
 	@Override
 	public void insertReservationHold(ReservationHoldVO vo) throws Exception { 
 		sqlSession.insert(namespace+".insertReservationHold", vo);
 	}
 	
-	//ì˜ˆì•½ ë³´ë¥˜ ë¦¬ìŠ¤íŠ¸
+	//¿¹¾à º¸·ù ¸®½ºÆ®
 	@Override
 	public List<ReservationHoldVO> rsrvHoldListAll()throws Exception {
 		return sqlSession.selectList(namespace+".rsrvHoldListAll");
 	}
 	
-	//ì˜ˆì•½ ë³´ë¥˜ ë¦¬ìŠ¤íŠ¸ ê°œìˆ˜
+	//¿¹¾à º¸·ù ¸®½ºÆ® °³¼ö
 	@Override
 	public int listCountPaging(Criteria cri) throws Exception {
 		return sqlSession.selectOne(namespace+".listCountPaging", cri);
@@ -45,5 +45,10 @@ public class ReservationHoldDAOImpl implements ReservationHoldDAO{
 	@Override
 	public void deleteReservationHold(Map<String,String> DeleteInfo)throws Exception {
 		sqlSession.delete(namespace+".deleteReservationHold", DeleteInfo);
+	}
+	
+	@Override
+	public void modifyReservationHold(ReservationHoldVO vo) throws Exception { //¿¹¾à ¼öÁ¤
+		sqlSession.update(namespace + ".modifyReservationHold", vo);
 	}
 }

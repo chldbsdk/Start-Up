@@ -20,4 +20,10 @@ public class ReservationConfirmServiceImpl implements ReservationConfirmService 
 	public void deleteReservationConfirm(Map<String,String> DeleteInfo)throws Exception {
 		dao.deleteReservationConfirm(DeleteInfo);
 	}
+	
+	//예약 수정
+	@Override
+	public void modifyReservationConfirm(ReservationConfirmVO vo) throws Exception {
+		dao.modifyReservationConfirm(vo);
+	}
 }

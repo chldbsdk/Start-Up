@@ -35,29 +35,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where Code = #{Code}
 	]]>
 	</select>
-		
-	<select id="courseClassification" resultType="MenuVO"> <!-- 만찬 메뉴 정보 뽑기 -->
+	
+	<!-- 만찬 메뉴 정보 뽑기 -->	
+	<select id="courseClassification" resultType="MenuVO"> 
+	<![CDATA[
 	select * from Menu
 	where Code="course"
+	]]>
 	</select>
 	
-	<select id="setClassification" resultType="MenuVO"> <!-- 정찬 메뉴 정보 뽑기 -->
+	<!-- 정찬 메뉴 정보 뽑기 -->
+	<select id="setClassification" resultType="MenuVO"> 
 	select * from Menu
 	where Code="set"
 	</select>
 	
-	<select id="distinctMenuCode" resultType="MenuVO">  <!-- menucode중복제거 -->
+	 <!-- menucode중복제거 -->
+	<select id="distinctMenuCode" resultType="MenuVO"> 
 	<![CDATA[
 	select distinct MenuCode,MenuCodeName
 	from Menu
 	]]>
 	</select>
 	
+	<!-- 페이징부분 -->
 	<select id="listCriteria" resultType="MenuVO">
 	<![CDATA[ 
 	select * 
 	from Menu
-	order by MenuCode limit #{pageStart}, #{perPageNum} 
+	order by CodeName limit #{pageStart}, #{perPageNum} 
 	]]>
 	</select>
 	
@@ -65,7 +71,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[
  	select count(MenuCode) 
  	from Menu 
- 	where MenuCode > 0 
  	]]>
  	</select>
 	

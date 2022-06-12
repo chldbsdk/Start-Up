@@ -39,7 +39,7 @@ font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
 .radio {float:left;text-align:center;padding:0 20px;font-weight:bold;}
 
 .input {width: 70%;height: 30px; border: none;background-color: #ededed;border-radius: 4px;color: #333;padding:10px;margin-top:10px;}
-textarea { width: 70%;height: 20px;border: none;background-color: #ededed;border-radius: 4px;color: #333;padding:100px;
+textarea { width: 70%;height: 20px;border: none;background-color: #ededed;border-radius: 4px;color: #333;padding:100px 10px;
 margin-top:10px;vertical-align:top;}
 
 #label { text-align:center; width:100px; height:20px;margin-top: 20px;  float:left;} 

@@ -32,7 +32,7 @@ public class IntroduceController {
 		model.addAttribute("list", introduceservice.introduceListAll());
 	}
 	
-	//ï¿½Ò°ï¿½ ï¿½ï¿½ï¿½
+	//¼Ò°³ ¸ñ·Ï
 	@RequestMapping(value="/IntroduceList", method=RequestMethod.GET)
 	public void introduceList(IntroduceVO vo, Model model) throws Exception{
 		System.out.println("Introduce GET Called");
@@ -46,7 +46,7 @@ public class IntroduceController {
 		model.addAttribute("list", introduceservice.introduceListAll());
 	}
 
-	//ï¿½Ò°ï¿½ ï¿½ï¿½ï¿½
+	//¼Ò°³ ¸ñ·Ï
 	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public String home(IntroduceVO vo, Model model) throws Exception{
 		System.out.println("Introduce GET Called");

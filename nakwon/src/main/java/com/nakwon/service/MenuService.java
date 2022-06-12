@@ -16,12 +16,13 @@ public interface MenuService {
 	
 	public List<MenuVO> menuCodeListAll(String Code) throws Exception;
 	
-	public List<MenuVO> courseCode() throws Exception; //ë§Œì°¬ ë©”ë‰´ ì •ë³´ ë½‘ê¸°
+	public List<MenuVO> courseCode() throws Exception; //¸¸Âù ¸Þ´º Á¤º¸ »Ì±â
 	 
-	public List<MenuVO> setCode() throws Exception; //ì •ì°¬ ë©”ë‰´ ì •ë³´ ë½‘ê¸°
+	public List<MenuVO> setCode() throws Exception; //Á¤Âù ¸Þ´º Á¤º¸ »Ì±â
 	
-	public List<MenuVO> distinctMenuCode() throws Exception; //ë©”ë‰´ì½”ë“œ ì¤‘ë³µ ì œê±°
+	public List<MenuVO> distinctMenuCode() throws Exception; //¸Þ´ºÄÚµå Áßº¹ Á¦°Å
 	
+	//ÆäÀÌÂ¡ºÎºÐ
 	public List<MenuVO> listCriteria(Criteria cri) throws Exception;
 	
 	public int listCountCriteria(Criteria cri) throws Exception;

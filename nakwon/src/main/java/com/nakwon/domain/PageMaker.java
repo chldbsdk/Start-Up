@@ -4,13 +4,13 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
-  private int totalCount; 
-  private int startPage;
-  private int endPage; 
-  private boolean prev; 
-  private boolean next; 
-  private int displayPageNum = 10; 
-  private Criteria cri; 
+  private int totalCount; //총 리스트 수
+  private int startPage; //게시글 시작 페이지(페이지마다 다름)
+  private int endPage; //게시글 끝 페이지(페이지마다 다름)
+  private boolean prev; //이전
+  private boolean next; //다음
+  private int displayPageNum = 10; //한 페이지에 출력될 리스트 개수
+  private Criteria cri; //현재 페이지, 한 페이지에 출력될 리스트 개수를 담은 class
 
   public void setCri(Criteria cri) {
     this.cri = cri;
@@ -35,7 +35,7 @@ public class PageMaker {
       endPage = tempEndPage;
     }
 
-    prev = startPage == 1 ? false : true; 
+    prev = startPage == 1 ? false : true; //시작 페이지가 1이면 false
 
     next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 
@@ -79,3 +79,5 @@ public class PageMaker {
   
 
 }
+
+

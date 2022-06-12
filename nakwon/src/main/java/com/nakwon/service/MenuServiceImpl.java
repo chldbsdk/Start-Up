@@ -39,20 +39,21 @@ public class MenuServiceImpl implements MenuService{
 	}
 	
 	@Override
-	public List<MenuVO> courseCode() throws Exception { //ë§Œì°¬ ë©”ë‰´ë“¤ ì •ë³´ ë½‘ê¸°
+	public List<MenuVO> courseCode() throws Exception { //¸¸Âù ¸Þ´ºµé Á¤º¸ »Ì±â
 		return dao.courseCode();
 	}
 	
 	@Override
-	public List<MenuVO> setCode() throws Exception { //ì •ì°¬ ë©”ë‰´ë“¤ ì •ë³´ ë½‘ê¸°
+	public List<MenuVO> setCode() throws Exception { //Á¤Âù ¸Þ´ºµé Á¤º¸ »Ì±â
 		return dao.setCode();
 	}
 	
 	@Override
-	public List<MenuVO> distinctMenuCode() throws Exception { //ë©”ë‰´ì½”ë“œ ì¤‘ë³µì œê±°
+	public List<MenuVO> distinctMenuCode() throws Exception { //¸Þ´ºÄÚµå Áßº¹Á¦°Å
 		return dao.distinctMenuCode();
 	}
 	
+	//ÆäÀÌÂ¡ºÎºÐ
 	@Override
 	public List<MenuVO> listCriteria(Criteria cri) throws Exception {
 	    return dao.listCriteria(cri);
@@ -60,6 +61,6 @@ public class MenuServiceImpl implements MenuService{
 
 	@Override
 	public int listCountCriteria(Criteria cri) throws Exception {
-	    return dao.countPaging(cri);
+	    return dao.listCountPaging(cri);
 	}
 }

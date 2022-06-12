@@ -26,10 +26,11 @@
 	
 	#nav #ahrefcourse:hover {color:#f4ae34;}
 	
-	#setdiv {margin:0 auto; width:1700px; height:500px; padding:50px 80px;}
+	#setdiv {margin:0 auto; width:1700px; height:500px; padding:110px;}
 	
 	#settbl {padding:0 30px;width:800px;}
-	#settbl td {border:1px solid;}
+	/* #settbl td {border:1px solid;} */
+	.BigTitle { font-weight: bold;font-size: 40px;margin-top: 20px;}
 					
 </style>
 </head>
@@ -44,107 +45,35 @@
 	</ul>
 </nav>
 
-<%-- <div>
-	<div id="setdiv">
-	<img style="float:left;"src="resources/Main2img/화랑부대찌개.png" width="800px" height="500px">
-	<table id="settbl">
-		<tr><td align="center"><h1>세트 A</h1><br></td></tr>
-		<tr>
-			<td><b>구성 : </b>
-				<c:forEach items="${uzhV27}" var="uzhV27">
-				<c:out value="${uzhV27.menuImg }"/>
-				</c:forEach>
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<c:set var="total" value="0"/>
-				<c:forEach items="${jXe0p }" var="jXe0p">
-				<c:set var="total" value="${total+(jXe0p.menuPrice) }"/>
-				</c:forEach>
-				<b>가격 : </b>${total}원
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p><b>소개 : </b>푸짐한 코스 A</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p><b>알러지 : </b>밀, 달걀, 땅콩, 생선, 콩</p>
-			</td>
-		</tr>
-	</table>
-	</div>
-	
-	<div id="setdiv">
-	<img style="float:left;"src="resources/Main2img/화랑부대찌개.png" width="800px" height="500px">
-	<table id="settbl">
-		<tr><td align="center"><h1>세트 B</h1><br></td></tr>
-		<tr>
-			<td><b>구성 : </b>
-				<c:forEach items="${Wssiv1}" var="Wssiv1">
-				<c:out value="${Wssiv1.menuDetailCodeName }"/>
-				</c:forEach>
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<c:set var="total" value="0"/>
-				<c:forEach items="${Wssiv1 }" var="Wssiv1">
-				<c:set var="total" value="${total+(Wssiv1.menuPrice) }"/>
-				</c:forEach>
-				<b>가격 : </b>${total}원
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p><b>소개 : </b>다양한 상차림 코스 B</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p><b>알러지 : </b>밀, 달걀, 땅콩, 생선, 콩</p>
-			</td>
-		</tr>
-	</table>
-	</div>
-</div> --%>
+
+
 <div>
-<div id="setdiv">
-	<img style="float:left;"src="resources/Main2img/화랑부대찌개.png" width="800px" height="500px">
 <script>
 		
 		let codeList = JSON.parse('${codeList}');
 
 		
-		for(let i = 1; i < codeList.length; i++){
-			
-			if(codeList[i].menuCode===codeList[i-1].menuCode) {
-				
-				document.write(","+codeList[i].menuDetailCodeName+"</td>");
-			}
-			else {
-				/* document.write(codeList[i-1].menuCodeName); */
-				/* document.write("<table id=t"+[i]+">"); */
-				document.write("<table id='settbl'");
-				document.write("<tr>");
-				document.write("<td align='center'><h1>"+codeList[i].menuCodeName+"</h1></td></tr>");
-				document.write("<td>"+codeList[i].menuDetailCodeName);
-
-				
-			}
+		for(let i = 0; i < codeList.length; i++){
+			document.write("<div id='setdiv'>");
+			document.write("<img style='float:left;' src='resources/Main2img/화랑부대찌개.png' width='900px' height='600px'>");
+			document.write("<table id='settbl'>");
+			document.write("<tr>");
+			document.write("<td class='BigTitle' align='center'>"+codeList[i].menuCodeName+"</td></tr>");
+			document.write("<td><h2>◈ 구성</h2>: "+codeList[i].menuDetailCodeName+"</td></tr>");
+			document.write("<tr>");
+			document.write("<td><h2>◈ 가격</h2>: "+codeList[i].menuPrice+"</td></tr>");
+			document.write("<tr>");
+			document.write("<td><h2>◈ 소개</h2>: "+codeList[i].menuContent+"</td></tr>");
+			document.write("<tr>");
+			document.write("<td><h2>◈ 알러지</h2>: "+codeList[i].menuAllergy+"</td></tr>");
+			document.write("</table>");
+			document.write("</div>");		
 			
 		}	
 
 </script>
 </div>
-</div>
+<footer><%@ include file="../main/footer.jsp" %></footer>
 </body>
 </html>
 

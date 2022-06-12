@@ -57,18 +57,14 @@ public class MenuController {
 	//메뉴 목록
 	@RequestMapping(value="/menuList", method=RequestMethod.GET)
 	public void menuList(@ModelAttribute("cri") Criteria cri,MenuVO vo, Model model) throws Exception{
-		System.out.println("MenuVO GET Called");
 		System.out.println(cri.toString());
 		
 		model.addAttribute("list", menuservice.listCriteria(cri));
 	    PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCri(cri);
 	    // pageMaker.setTotalCount(131);
-
 	    pageMaker.setTotalCount(menuservice.listCountCriteria(cri));
-
 	    model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("list", menuservice.menuListAll());
 			
 	}
 	@RequestMapping(value="/menuList", method=RequestMethod.POST)

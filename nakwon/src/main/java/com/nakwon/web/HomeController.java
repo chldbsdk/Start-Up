@@ -116,8 +116,26 @@ public class HomeController {
 	   
 	// 메뉴등록
 	@RequestMapping(value = "/menucheck", method = RequestMethod.POST)
-	public String managerMainMenuAddPOSTmenucheck(MenuVO vo, Model model) throws Exception {
-		System.out.println("ss GET Called");
+	public String managerMainMenuAddPOSTmenucheck(Model model,HttpServletRequest request) throws Exception {
+		MenuVO vo = new MenuVO();
+		vo.setCode(request.getParameter("Code"));
+		vo.setCodeName(request.getParameter("CodeName"));
+		vo.setMenuCode(request.getParameter("MenuCode"));
+		vo.setMenuCodeName(request.getParameter("MenuCodeName"));
+		vo.setMenuDetailCode(request.getParameter("MenuDetailCode"));
+		vo.setMenuDetailCodeName(request.getParameter("MenuDetailCodeName"));
+		vo.setMenuPrice(request.getParameter("MenuPrice"));
+		vo.setMenuIngredients(request.getParameter("MenuIngredients"));
+	
+		String menucontent=request.getParameter("MenuContent");
+		menucontent=menucontent.replace("\r\n","<br>");
+		vo.setMenuContent(menucontent);
+		
+		String menuallergy=request.getParameter("MenuAllergy");
+		menuallergy=menuallergy.replace("\r\n", "<br>");
+		vo.setMenuAllergy(menuallergy);
+		
+		vo.setMenuImg(request.getParameter("MenuImg"));
 	    menuservice.insert(vo);
 	    model.addAttribute("list", menuservice.menuListAll());
 	    return "redirect:/managerMain";
@@ -133,9 +151,6 @@ public class HomeController {
 		String codeList = objm.writeValueAsString(courselist);
 		model.addAttribute("codeList",codeList);
 			
-//			logger.info("변경 전.........." + courselist);
-//			logger.info("변경 후.........." + codeList); 
-			
 		return "project/menu/courseMenu";
 	}
 		
@@ -144,7 +159,7 @@ public class HomeController {
 	public String menuSet(MenuVO vo, Model model, HttpServletRequest request) throws Exception {
 		ObjectMapper objm = new ObjectMapper();
 			
-		List setlist=menuservice.setCode();
+		List<MenuVO> setlist=menuservice.setCode();
 		String codeList = objm.writeValueAsString(setlist);
 		model.addAttribute("codeList",codeList);
 			
