@@ -41,8 +41,6 @@ margin-top:10px;vertical-align:top;}
 <form class="introduceAdd" name="introduceAddform" method="post" accept-charset="utf-8" action="introducecheck.do">
 	<div class="wrap">
 		<button type="button" id="open" class="btn_add">소개 등록</button>
-		<button type="button" id="modify" class="btn_modify">소개 수정</button>
-		<button type="button" id="delete" class="btn_delete">소개 삭제</button>
 		<div id="add_introduce" class="introduce" style="display:none;">
 	
 		<div class="inner">
@@ -57,7 +55,7 @@ margin-top:10px;vertical-align:top;}
 		
 		<label for="IntroContent" id="label"><b>상세 내용</b></label>
 		<textarea id="IntroContent" name="IntroContent" cols="20" rows="20"></textarea>
-		<br>		
+		<br><br><br>		
 	
 		<input type="file" id="IntroImg" name="IntroImg" multiple/>
 		<!-- <button type="button" class="btn_img" onclick="imgupload()"><i class="fas fa-plus"></i></button> -->
@@ -75,12 +73,6 @@ margin-top:10px;vertical-align:top;}
 $(document).ready(function() {
 	$("#open").click(function() {
 		$("#add_introduce").show();
-	});
-	$("#modify").click(function() {
-		$("#modify_introduce").show();
-	});
-	$("#delete").click(function() {
-		$("#delete_introduce").show();
 	});
 });
 	var target=document.querySelectorAll('.btn_add');
@@ -116,4 +108,4 @@ $(document).ready(function() {
 	
 </script>
 </body>
-</html> 
+</html>

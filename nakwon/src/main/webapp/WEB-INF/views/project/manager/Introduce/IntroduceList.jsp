@@ -62,6 +62,21 @@ border-left:none;
 #sampleModalPopup {
 padding:20px;
 }
+li {
+	list-style: none;
+	display: inline-block;
+}
+li a {
+	color: black;
+	border-radius: 5px;
+	background-color: #fafafa;
+	border-color: black;
+	display: block;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+}
+.paging-wrap { text-align: center; }
 </style>
 <body>
 <!-- <div class="openPopup">클릭하면 팝업이 나와요</div>    -->
@@ -76,7 +91,6 @@ padding:20px;
     <div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="-1"></div>
 	</div>
 
-
     <table id="listTbl">
 	<thead>
 	<tr>
@@ -85,19 +99,40 @@ padding:20px;
 	<th>세부 내용</th>
 	</tr>
 	</thead>
-	 <c:forEach items="${list}" var="list">
+	 <c:forEach items="${list}" var="introcudeVO">
             <tr>
-            	<td align="center"><c:out value="${list.introCode}"/></td>
-                <td align="center"><c:out value="${list.introTitle}"/></td>
-                <td align="center"><c:out value="${list.introContent}"/></td>
+            	<td align="center">${introcudeVO.introCode}</td>
+                <td align="center">${introcudeVO.introTitle}</td>
+                <td align="center">${introcudeVO.introContent}</td>
             </tr>
-</c:forEach> 
-</table>
+	</c:forEach> 
+	</table>
     </div>
+    
+    <div class="paging-wrap">
+		<ul class="pagination">
+			<c:if test="${pageMakerIntro.prev}"> <!-- 시작 페이지가 1이 아니라면 이전버튼 생성 -->
+			<!-- &laquosms 특수문자 << -->
+				<li><a href="${pageMakerIntro.startPage - 1}">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${pageMakerIntro.startPage }" end="${pageMakerIntro.endPage }" var="index">
+				<li
+					<c:out value="${pageMakerIntro.criIntro.page == index?'class =active':''}"/>>
+						<a href="${index}">${index}</a>
+					</li>
+			</c:forEach>
+			<c:if test="${pageMakerIntro.next && pageMakerIntro.endPage > 0}">
+				<li><a href="${pageMakerIntro.endPage +1}">&raquo;</a></li>
+			</c:if>
+		</ul>
+	</div>
+		
+	<form id="jobForm">
+  		<input type='hidden' name="page" value="${pageMakerIntro.criIntro.perPageNum}">
+  		<input type='hidden' name="perPageNum" value="${pageMakerIntro.criIntro.perPageNum}">
+	</form>
 </div>
 </body>
-
-
 <script>
   $(document).ready(function( $ ){     
     $(".openPopup").on("click", function(event) { 
@@ -120,6 +155,29 @@ padding:20px;
 	    $("#sampleModalPopup").load(url, function() { 
 	   });
     
+	    var target=document.querySelectorAll('.reservationHold');
+		var targetID;
+		var btnPopClose = document.querySelectorAll('.btn_close');
+		// 팝업 닫기
+		for(var j = 0; j < target.length; j++){
+			btnPopClose[j].addEventListener('click', function(){
+			this.parentNode.parentNode.style.display = 'none';
+			$(".backon").hide();
+			});
+		}   		
   });
+  
+  //페이징 처리
+  $(".pagination li a").on("click", function(event){
+		
+		event.preventDefault(); 
+		
+		var targetPage = $(this).attr("href");
+		
+		var jobForm = $("#jobForm");
+		jobForm.find("[name='page']").val(targetPage);
+		jobForm.attr("action","/project/manager/Introduce/IntroduceList").attr("method", "get");
+		jobForm.submit();
+	});
 </script>
 </html>

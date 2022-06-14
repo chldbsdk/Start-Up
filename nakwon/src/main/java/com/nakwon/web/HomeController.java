@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,11 +24,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nakwon.domain.Criteria;
 import com.nakwon.domain.IntroduceVO;
 import com.nakwon.domain.ManagerVO;
 import com.nakwon.domain.MenuVO;
+import com.nakwon.domain.PageMaker;
 import com.nakwon.domain.ReservationConfirmVO;
 import com.nakwon.domain.ReservationHoldVO;
+import com.nakwon.service.BoardService;
 import com.nakwon.service.IntroduceService;
 import com.nakwon.service.ManagerService;
 import com.nakwon.service.MenuService;
@@ -57,6 +61,9 @@ public class HomeController {
 	
 	@Inject
 	private ReservationConfirmService reservationconfirmservice;
+	
+	@Inject
+	private BoardService boardservice;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -113,6 +120,19 @@ public class HomeController {
 	    model.addAttribute("list", introduceservice.introduceListAll());
 	    return "redirect:/managerMain";
 	}
+	
+	// 소개 페이지 mapping
+		@RequestMapping(value = "/introduce", method = RequestMethod.GET)
+		public String introduce(IntroduceVO vo, Model model, HttpServletRequest request) throws Exception {
+
+			ObjectMapper objm = new ObjectMapper();
+				
+			List<IntroduceVO> introducelistAll = introduceservice.introduceListAll();
+			String introduceListAll = objm.writeValueAsString(introducelistAll);
+			model.addAttribute("introduceListAll",introduceListAll);
+			
+			return "project/Introduce/introduce";
+		}
 	   
 	// 메뉴등록
 	@RequestMapping(value = "/menucheck", method = RequestMethod.POST)
@@ -226,6 +246,7 @@ public class HomeController {
 					rttr.addAttribute("Code", holdvo.getCode()); //정찬/만찬
 					rttr.addAttribute("MenuCode", holdvo.getMenuCode()); //메뉴
 					rttr.addAttribute("result", result); //조회 결과
+					
 				}
 			}
 			else { //정보가 있으면 확정 테이블의 정보를 리다이렉트로 보냄.
@@ -239,6 +260,7 @@ public class HomeController {
 				rttr.addAttribute("Code", confirmvo.getCode()); //정찬/만찬
 				rttr.addAttribute("MenuCode", confirmvo.getMenuCode()); //메뉴
 				rttr.addAttribute("result", result); //조회 결과
+				rttr.addAttribute("MenuCodeName",confirmvo.getMenuCodeName());
 			}
 		} catch(Exception e) {
 			e.printStackTrace(); //에러일 경우 에러 코드 전송 400 
@@ -437,5 +459,48 @@ public class HomeController {
 		
 		return "project/reservation/reservationFail";
 	}
-
+	
+	//공지 페이지 mapping
+	@RequestMapping(value = "/notice", method = RequestMethod.GET)
+	public String notice(@ModelAttribute("cri") Criteria cri,MenuVO vo, Model model) throws Exception{
+		model.addAttribute("list", boardservice.noticeCriteria(cri));
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    // pageMaker.setTotalCount(131);
+	    pageMaker.setTotalCount(boardservice.noticeCountPaging(cri));
+	    model.addAttribute("pageMaker", pageMaker);
+	    
+		return "project/board/notice";
+	}
+	
+	@RequestMapping(value="/notice", method=RequestMethod.POST)
+	public void noticePOST(ReservationHoldVO vo, Model model) throws Exception{
+		
+		model.addAttribute("list", boardservice.noticeListAll());
+				
+	}
+	//문의 페이지 mapping
+	@RequestMapping(value = "/QnA", method = RequestMethod.GET)
+	public String QnA(@ModelAttribute("cri") Criteria cri,MenuVO vo, Model model) throws Exception{
+		model.addAttribute("list", boardservice.qnaCriteria(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		// pageMaker.setTotalCount(131);
+		pageMaker.setTotalCount(boardservice.qnaCountPaging(cri));
+		model.addAttribute("pageMaker", pageMaker);
+		    
+		return "project/board/QnA";
+	}
+	//리뷰 페이지 mapping
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	public String review(@ModelAttribute("cri") Criteria cri,MenuVO vo, Model model) throws Exception{
+		model.addAttribute("list", boardservice.reviewCriteria(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		// pageMaker.setTotalCount(131);
+		pageMaker.setTotalCount(boardservice.reviewCountPaging(cri));
+		model.addAttribute("pageMaker", pageMaker);
+		    
+		return "project/board/review";
+	}
 }

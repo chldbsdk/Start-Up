@@ -2,9 +2,10 @@ package com.nakwon.service;
 
 import java.util.List;
 import java.util.Map;
+
+import com.nakwon.domain.Criteria;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
-import com.nakwon.domain.Criteria;
 import com.nakwon.domain.ReservationHoldVO;
 import com.nakwon.persistence.ReservationHoldDAO;
 
@@ -22,12 +23,12 @@ public class ReservationHoldServiceImpl implements ReservationHoldService {
 	public List<ReservationHoldVO> rsrvHoldListAll() throws Exception {
 		return dao.rsrvHoldListAll();
 	}
-
+	
 	@Override
 	public int listCountCriteria(Criteria cri) throws Exception {
 		return dao.listCountPaging(cri);
 	}
-	
+
 	@Override
 	public List<ReservationHoldVO> listCriteria(Criteria cri)throws Exception {
 		return dao.listCriteria(cri);
@@ -43,9 +44,13 @@ public class ReservationHoldServiceImpl implements ReservationHoldService {
 		dao.deleteReservationHold(DeleteInfo);
 	}
 	
-	//예약 수정
 	@Override
 	public void modifyReservationHold(ReservationHoldVO vo) throws Exception {
 		dao.modifyReservationHold(vo);
+	}
+	
+	@Override
+	  public ReservationHoldVO reservationRead(String RsrvCode) throws Exception {
+		 return dao.reservationRead(RsrvCode);
 	}
 }

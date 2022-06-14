@@ -9,7 +9,7 @@
     font-weight: normal;
     font-style: normal;
 }
-ul, li, div{
+#footer-wrap{
 	font-family: 'HSGyoulnoonkot';
 }
 li{

@@ -13,7 +13,7 @@
     src: url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap') ;
     font-weight: normal;
     font-style: normal;
-}	
+}   
 * {
     margin: 0;
     padding: 0;
@@ -23,7 +23,7 @@
  body {
     min-height: 100vh;
     display: flex; /*가운데*/
-   	align-items: center;
+      align-items: center;
     justify-content: center;
 } 
 .login-form {
@@ -108,46 +108,46 @@
 </style>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<script type="text/javascript">	
-	function loginCheck2() {
-		if(document.loginform.userid.value=="")
-			return;
-		if(document.loginform.userpw.value=="")
-			return;
-		}
-		document.loginform.submit();
-	}
+<script type="text/javascript">   
+   function loginCheck2() {
+      if(document.loginform.userid.value=="")
+         return;
+      if(document.loginform.userpw.value=="")
+         return;
+      }
+      document.loginform.submit();
+   }
 </script>
 <body>
 <form class="login-form" name="loginform" action="logincheck.do" method="post">
-	<div>
-	<h1>LOGIN</h1>
-	<div class="textb">
-		<input type="text" name="userid" required> <!-- required가 입력하라고 말해주는애임 -->
-		<div class="id fas fa-user-alt"></div>
-		<div class="placeholder">ID</div>
-	</div>
+   <div>
+   <h1>LOGIN</h1>
+   <div class="textb">
+      <input type="text" name="userid" required> <!-- required가 입력하라고 말해주는애임 -->
+      <div class="id fas fa-user-alt"></div>
+      <div class="placeholder">ID</div>
+   </div>
 
-	<div class="textb">
-		<input type="password" name="userpw" required>
-		<div class="show-password fas fa-lock"></div>
-		<div class="placeholder">PASSWORD</div>
-		
-		</div>
+   <div class="textb">
+      <input type="password" name="userpw" required>
+      <div class="show-password fas fa-lock"></div>
+      <div class="placeholder">PASSWORD</div>
+      
+      </div>
 
-	<button class="btn fas fa-arrow-right" onclick="loginCheck2()"></button>
+   <button class="btn fas fa-arrow-right" onclick="loginCheck2()"></button>
 
-	<c:if test = "${result==0 }">
-		<script type="text/javascript">
-		swal({
-			title: "로그인에 실패하였습니다.",
-			text: "아이디 또는 비밀번호를 잘못 입력하셨습니다.",
-			icon: "error",
-			closeOnClickOutside: false
-		});
-		</script>
-		</c:if>
-	</div>
+   <c:if test = "${result==0 }">
+      <script type="text/javascript">
+      swal({
+         title: "로그인에 실패하였습니다.",
+         text: "아이디 또는 비밀번호를 잘못 입력하셨습니다.",
+         icon: "error",
+         closeOnClickOutside: false
+      });
+      </script>
+      </c:if>
+   </div>
 </form>
 </body>
 </html>

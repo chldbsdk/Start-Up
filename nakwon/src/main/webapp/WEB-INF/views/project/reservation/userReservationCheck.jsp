@@ -119,6 +119,7 @@
 		<form role="form" method="post">
 			<input type='hidden' name="RsrvCode" value="${RsrvCode}">
 			<input type='hidden' name="Phone" value="${Phone}">
+			<input type='hidden' name="Name" value="${Name}">
 			<input type='hidden' name="result" value="${result}">
 		</form>
 	
@@ -164,8 +165,8 @@ $(document).ready(function(){
    
    	//예약 변경 버튼을 누른 경우
    	$(".reservationModifyBtn").on("click", function(){
-      	formObj.attr("action", "/board/modify");
-      	formObj.attr("method", "get");      
+      	formObj.attr("action", "/modifyReservation"); //예약 변경 화면으로 이동
+      	formObj.attr("method", "get");  
       	formObj.submit();
    	});
    

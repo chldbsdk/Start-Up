@@ -3,17 +3,16 @@ package com.nakwon.web;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 import com.nakwon.service.MenuService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,6 +66,7 @@ public class MenuController {
 	    model.addAttribute("pageMaker", pageMaker);
 			
 	}
+	
 	@RequestMapping(value="/menuList", method=RequestMethod.POST)
 	public void menuListPOST(MenuVO vo, Model model) throws Exception{
 		System.out.println("MenuVO GET Called");
@@ -77,25 +77,89 @@ public class MenuController {
 	
 	@RequestMapping(value="/viewMenu", method=RequestMethod.GET)
 	public void viewMenu(@RequestParam("MenuDetailCode") String MenuDetailCode,Model model) throws Exception{
-		System.out.println("ss GET Called");
+		System.out.println("viewMenu Called");
 		model.addAttribute("menu", menuservice.read(MenuDetailCode));
 		model.addAttribute("list", menuservice.distinctMenuCode());
 			
 	}
 	
 	// 메뉴수정
-		@RequestMapping(value = "/menumodify", method = RequestMethod.POST)
-		public String menumodify(@RequestParam("MenuDetailCode") String MenuDetailCode, MenuVO vo, Model model) throws Exception {
-			System.out.println("ss GET Called");
+//	@RequestMapping(value = "/menumodify", method = RequestMethod.POST)
+//	public String menumodify(Criteria cri, Model model,RedirectAttributes rttr,HttpServletRequest request) throws Exception {
+//		System.out.println("modify Called");
+//			/*
+//			 * for(MultipartFile multipartFile : uploadFile) { logger.info("------------");
+//			 * logger.info("Upload File Name: "+multipartFile.getOriginalFilename());
+//			 * logger.info("Upload File Size: "+multipartFile.getSize()); }
+//			 */
+//			
+//			/* model.addAttribute("list", menuservice.menuListAll()); */
+//			
+//			
+//		MenuVO vo = new MenuVO();
+//		vo.setCode(request.getParameter("Code"));
+//		vo.setCodeName(request.getParameter("CodeName"));
+//		vo.setMenuCode(request.getParameter("MenuCode"));
+//		vo.setMenuCodeName(request.getParameter("MenuCodeName"));
+//		vo.setMenuDetailCode(request.getParameter("MenuDetailCode"));
+//		vo.setMenuDetailCodeName(request.getParameter("MenuDetailCodeName"));
+//		vo.setMenuPrice(request.getParameter("MenuPrice"));
+//		vo.setMenuIngredients(request.getParameter("MenuIngredients"));
+//		
+//		String menucontent=request.getParameter("MenuContent");
+//		menucontent=menucontent.replace("\r\n","<br>");
+//		vo.setMenuContent(menucontent);
+//			
+//		String menuallergy=request.getParameter("MenuAllergy");
+//		menuallergy=menuallergy.replace("\r\n", "<br>");
+//		vo.setMenuAllergy(menuallergy);
+//			
+//		vo.setMenuImg(request.getParameter("MenuImg"));
+//		menuservice.update(vo);
+//		    
+//		rttr.addAttribute("page", cri.getPage());
+//		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+//		rttr.addFlashAttribute("msg", "SUCCESS");
+//		return "project/menu/courseMenu";
+//	}
+	@RequestMapping(value = "/viewMenu", method = RequestMethod.POST)
+	public String menumodify(Criteria cri, Model model,RedirectAttributes rttr,HttpServletRequest request) throws Exception {
+		System.out.println("modify Called");
 			/*
 			 * for(MultipartFile multipartFile : uploadFile) { logger.info("------------");
 			 * logger.info("Upload File Name: "+multipartFile.getOriginalFilename());
 			 * logger.info("Upload File Size: "+multipartFile.getSize()); }
 			 */
-			menuservice.update(vo);
+			
 			/* model.addAttribute("list", menuservice.menuListAll()); */
-			return "project/manager/menu/menuAdd";
-		}
+			
+			
+		MenuVO vo = new MenuVO();
+		vo.setCode(request.getParameter("Code"));
+		vo.setCodeName(request.getParameter("CodeName"));
+		vo.setMenuCode(request.getParameter("MenuCode"));
+		vo.setMenuCodeName(request.getParameter("MenuCodeName"));
+		vo.setMenuDetailCode(request.getParameter("MenuDetailCode"));
+		vo.setMenuDetailCodeName(request.getParameter("MenuDetailCodeName"));
+		vo.setMenuPrice(request.getParameter("MenuPrice"));
+		vo.setMenuIngredients(request.getParameter("MenuIngredients"));
+		
+		String menucontent=request.getParameter("MenuContent");
+		menucontent=menucontent.replace("\r\n","<br>");
+		vo.setMenuContent(menucontent);
+			
+		String menuallergy=request.getParameter("MenuAllergy");
+		menuallergy=menuallergy.replace("\r\n", "<br>");
+		vo.setMenuAllergy(menuallergy);
+			
+		vo.setMenuImg(request.getParameter("MenuImg"));
+		menuservice.update(vo);
+		    
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		return "project/manager/managerMain";
+	}
 
 	//test
 	@RequestMapping(value="/test", method=RequestMethod.GET)

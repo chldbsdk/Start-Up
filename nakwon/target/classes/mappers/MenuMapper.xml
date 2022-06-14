@@ -41,6 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[
 	select * from Menu
 	where Code="course"
+	order by MenuCodeName
 	]]>
 	</select>
 	
@@ -48,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="setClassification" resultType="MenuVO"> 
 	select * from Menu
 	where Code="set"
+	order by MenuCodeName
 	</select>
 	
 	 <!-- menucode중복제거 -->
@@ -63,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[ 
 	select * 
 	from Menu
-	order by CodeName limit #{pageStart}, #{perPageNum} 
+	order by CodeName,MenuCodeName limit #{pageStart}, #{perPageNum} 
 	]]>
 	</select>
 	

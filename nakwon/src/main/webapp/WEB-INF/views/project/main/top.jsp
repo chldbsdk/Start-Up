@@ -37,13 +37,13 @@
 <body  topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0">
 <div class="topdiv">
 <ul class="topul">
-<li class="topli"><a href=#>소개</a></li>
+<li class="topli"><a href="#" onclick="location.href='http://localhost:8031/introduce'" >소개</a></li>
 <li class="topli"><a href="#" onclick="location.href='http://localhost:8031/courseMenu'">메뉴</a></li>
 <li class="topli"><a href="#" onClick="location.href='http://localhost:8031/reservationMain'">예약</a></li>
-<li class="topli"><a href="#" onclick="location.href='http://localhost:8031/login'"><img src="resources/img/logo.png"  width="100" height="100"></a></li>
+<li class="topli"><a href="#" onclick="location.href='http://localhost:8031/main'"><img src="resources/img/logo.png"  width="100" height="100"></a></li>
 <li class="topli"><a href="#" onclick="location.href='http://localhost:8031/location'">오시는 길</a></li>
-<li class="topli"><a href=#>고객의 소리</a></li>
-<li class="topli"><a href=#>공지</a></li>
+<li class="topli"><a href="#" onclick="location.href='http://localhost:8031/QnA'">고객의 소리</a></li>
+<li class="topli"><a href="#" onclick="location.href='http://localhost:8031/notice'">공지</a></li>
 </ul></div>
 </body>
 </html> 

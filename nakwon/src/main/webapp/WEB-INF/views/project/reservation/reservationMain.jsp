@@ -84,6 +84,7 @@ body {
 </style>
 </head>
 <body>
+<!-- 예약 메인 페이지 -->
 <%@ include file="../main/top.jsp" %>
 
 <div id="resv-allwrap">

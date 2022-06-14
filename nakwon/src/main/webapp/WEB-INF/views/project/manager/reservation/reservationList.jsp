@@ -9,6 +9,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <style>
 @font-face {
@@ -59,6 +63,8 @@ body {font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
 	width: 780px;
 	margin-top: 20px;
 }
+#listTbl a { text-decoration:none !important; text-color: black;}
+#listTbl a:hover { text-decoration:none !important }
 #listTbl th,td {
 	border-top: 1px solid #444444;
 	border-bottom: 1px solid #444444;
@@ -109,12 +115,8 @@ body {font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
 	margin-right: 20px;
 	float: right;
 }
-.allergy { 
-	color: #d22e2e; 
-	}
-label {
-	font-weight: normal;
-}
+.allergy { color: #d22e2e; }
+label {font-weight: normal;}
 .checkboxborder {
 	border-left: none;
 	border-top: none;
@@ -163,7 +165,6 @@ float: right;}
 	</div>
 	
 	<div>
-		<div id="deleteRsrv"><button type="button" class="btn_delete">삭제</button></div>
 		<div align="right" style="position: inline-block;">
     		<div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="0"></div>
 		</div>
@@ -182,15 +183,24 @@ float: right;}
             <tr>
             	<td align="center" class="checkboxborder"><input type="checkbox" name="chBox" class="chBox" value="${list.rsrvCode }"></td>
             	<td align="center" style="width: 270px;">
+            		<a href='/project/manager/reservation/reservationRead${pageMaker.makeQuery(pageMaker.cri.page) }&RsrvCode=${list.rsrvCode}'>
             		<!-- 알러지 있으면 빨간색으로 Allergy 표시 -->
             		<c:if test="${list.message != '' }">
             			<span class="allergy"><i class="fas fa-exclamation"></i></span>
             		</c:if>
             		<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.rsrvDate}" />
+            		</a>
             	</td>
                 <td align="center"><c:out value="${list.name}"/></td>
                 <td align="center"><c:out value="${list.pnum}"/></td>
-                <td align="center"><c:out value="${list.menuCode}"/></td>
+                <td align="center">
+                	<c:if test="${list.code == 'course' }">
+            			<c:out value="만찬(풀세트)의 ${list.menuCodeName}"/>
+            		</c:if>
+                	<c:if test="${list.code == 'set' }">
+            			<c:out value="정찬(세트메뉴)의 ${list.menuCodeName}"/>
+            		</c:if>
+                </td>
             </tr>
 	</c:forEach> 
 	</table>
@@ -220,9 +230,7 @@ float: right;}
   <input type='hidden' name="page" value=${pageMaker.cri.perPageNum}>
   <input type='hidden' name="perPageNum" value=${pageMaker.cri.perPageNum}>
 </form>
-
 </body>
-
 
 <script>
 $(document).ready(function( $ ){     
@@ -239,8 +247,8 @@ $(document).ready(function( $ ){
             $("#popup01").hide();
       	    $(".backon").hide();
         }
-      });
-     var url = "http://localhost:8031/project/manager/menu/menuAdd";
+     });
+     var url = "http://localhost:8031/project/manager/reservation/ReservationAdd";
 	    
 	    // 팝업 호출
 	    $("#sampleModalPopup").load(url, function() { 
@@ -255,9 +263,8 @@ $(document).ready(function( $ ){
 		this.parentNode.parentNode.style.display = 'none';
 		$(".backon").hide();
 		});
-	}    
+	}     
 });
-
 //All 눌렀을 경우
 $("#allCheck").click(function(){
 	var chk = $("#allCheck").prop("checked"); //prop("property name"): 속성 값을 가져옴
@@ -267,24 +274,17 @@ $("#allCheck").click(function(){
 		$(".chBox").prop("checked", false); //체크박스 체크 x
 	}
 });
-
-//paging 처리
-/* var result = '${msg}';
-
-if (result == 'SUCCESS') {
-	alert("처리가 완료되었습니다.");
-} */
-
+//하단 페이징 버튼(li)을 눌렀을 경우
 $(".pagination li a").on("click", function(event){
 	
-	event.preventDefault(); 
+	event.preventDefault(); //원하는 값들을 보내기 위해!, a태그를 클릭해도 원하는 href으로 이동x, submit태그를 클릭해도 새로고침 안되게 하기. 
 	
-	var targetPage = $(this).attr("href");
+	var targetPage = $(this).attr("href");//누른 페이지 수(페이징 페이지 수)
 	
-	var jobForm = $("#jobForm");
-	jobForm.find("[name='page']").val(targetPage);
-	jobForm.attr("action","/project/manager/reservation/reservationList").attr("method", "get");
-	jobForm.submit();
+	var jobForm = $("#jobForm"); //form 객체를 변수에 담음.
+	jobForm.find("[name='page']").val(targetPage); //form의 이름이 page인 것의 값(value)을 누른 페이지 수를 담음.
+	jobForm.attr("action","/project/manager/reservation/reservationList").attr("method", "get"); //form의 action 속성에 /board/listPage를, method 속성에 get을 지정. => / /board/listPage.jsp를 get방식으로 실행
+	jobForm.submit(); //폼 데이터 전송(li 눌렀을 때 넘어갈 게시글 index, 페이지 당 출력될 게시물 개수 => 즉 cri)
 });
 </script>
 </html>

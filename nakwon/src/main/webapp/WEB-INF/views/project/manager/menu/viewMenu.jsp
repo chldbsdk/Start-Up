@@ -18,9 +18,9 @@
     src: url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap') ;
     font-weight: normal;
     font-style: normal;
-	}
+}
 	
-.menubody{margin:0; padding:0;}
+.modifybody{margin:0; padding:0; font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
 
 a{text-decoration:none;}
 /* .wrap{width:100%;height:100%;background-color: yellow;padding: 50px 60px;}*/
@@ -39,7 +39,7 @@ font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
 .radio {float:left;text-align:center;padding:0 20px;font-weight:bold;}
 
 .input {width: 70%;height: 30px; border: none;background-color: #ededed;border-radius: 4px;color: #333;padding:10px;margin-top:10px;}
-textarea { width: 70%;height: 20px;border: none;background-color: #ededed;border-radius: 4px;color: #333;padding:100px;
+textarea { width: 70%;height: 20px;border: none;background-color: #ededed;border-radius: 4px;color: #333;padding:100px 10px;
 margin-top:10px;vertical-align:top;}
 
 #label { text-align:center; width:100px; height:20px;margin-top: 20px;  float:left;} 
@@ -47,10 +47,16 @@ margin-top:10px;vertical-align:top;}
 #MenuImg {display:none;}
 
 #labelImg{font-size: 2rem;text-align:center;width:100px;height:20px;margin-top: 20px;  float:left;cursor: pointer;}
+
+.BigTitle { 
+	font-weight: bold;
+	font-size: 30px;
+	margin-top: 20px;
+}
 </style>
 
-<body class="menubody">
-<form class="menuAdd" id="menuAddform" name="menuAddform" action="menumodify.do"method="post" accept-charset="utf-8">
+<body class="modifybody">
+<form class="menumodify" id="menumodifyform" name="menumodifyform" method="post" accept-charset="utf-8">
 	<div class="wrap">
 		<!-- <a href="#add_menu" class="btn_add">메뉴 등록</a> 얘 없앨거임 -->
 		<!-- <button type="button" id="open" class="btn_add">메뉴 등록</button> -->
@@ -59,12 +65,13 @@ margin-top:10px;vertical-align:top;}
 		<div class="inner">
 		
 		<button type="button" class="btn_close" ><i class="fa fa-close"></i></button>
-		<h2 style="float:center;">메뉴 등록</h2>
+		<div class="BigTitle" style="float:center;">메뉴 등록</div>
 		
 		<div class="radio">
 			<label><input type="radio" id="course" name="Code" value="course" onchange="radiochk()"
 			<c:if test="${menu.code eq 'course' }">checked</c:if> />만찬</label>
-			<label><input type="radio" id="set" name="Code" value="set" onchange="radiochk()" >정찬<br></label>
+			<label><input type="radio" id="set" name="Code" value="set" onchange="radiochk()" 
+			<c:if test="${menu.code eq 'set' }">checked</c:if> />정찬<br></label>
 		</div>
 
 		<br><br><br>
@@ -103,6 +110,7 @@ margin-top:10px;vertical-align:top;}
 		<input type="text" name="MenuIngredients" id="MenuIngredients" class="input" 
 		value='<c:out value="${menu.menuIngredients}"/>' required>
 		<br>
+		
 		<label for="MenuContent" id="label"><b>상세 내용</b></label>
 		<textarea id="MenuContent" name="MenuContent" cols="20" rows="20">
 		<c:out value="${menu.menuContent}"/></textarea>
@@ -150,33 +158,33 @@ $(document).ready(function() {
 	}
 	
 	function modifyBtn() {
-		if(document.menuAddform.MenuDetailCodeName.value=="") {
+		if(document.menumodifyform.MenuDetailCodeName.value=="") {
 			alert("메뉴명을 입력해주세요.");
-			document.menuAddform.MenuDetailCodeName.focus();
+			document.menumodifyform.MenuDetailCodeName.focus();
 			return;
 		}
 			
-		if(document.menuAddform.MenuPrice.value=="") {
+		if(document.menumodifyform.MenuPrice.value=="") {
 			alert("가격을 입력해주세요.");
-			document.menuAddform.MenuPrice.focus();
+			document.menumodifyform.MenuPrice.focus();
 			return;
 		}
 
-		if(document.menuAddform.MenuIngredients.value=="") {
+		if(document.menumodifyform.MenuIngredients.value=="") {
 			alert("재료를 입력해주세요.");
-			document.menuAddform.MenuIngredients.focus();
+			document.menumodifyform.MenuIngredients.focus();
 			return;
 		}
 
-		if(document.menuAddform.MenuContent.value=="") {
+		if(document.menumodifyform.MenuContent.value=="") {
 			alert("내용을 입력해주세요.");
-			document.menuAddform.MenuContent.focus();
+			document.menumodifyform.MenuContent.focus();
 			return;
 		}
 
-		if(document.menuAddform.MenuAllergy.value=="") {
+		if(document.menumodifyform.MenuAllergy.value=="") {
 			alert("알러지 정보를 입력해주세요.");
-			document.menuAddform.MenuAllergy.focus();
+			document.menumodifyform.MenuAllergy.focus();
 			return;
 		}
 		
@@ -189,9 +197,9 @@ $(document).ready(function() {
 		}
 		document.getElementById("MenuDetailCode").value=result;
 		
-		alert("등록 성공"); //이거 바꾸기 if 문으로
+		alert("수정 성공"); //이거 바꾸기 if 문으로
 		history.back();
-		document.menuAddform.submit();
+		document.menumodifyform.submit();
 	}
 	 
 	function radiochk(){	
@@ -224,9 +232,6 @@ $(document).ready(function() {
 			menucode.value=result;
 		}
 	}
-	
-
-
 </script>
 </body>
 </html> 

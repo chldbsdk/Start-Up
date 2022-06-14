@@ -24,17 +24,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from ReservationHold
 	]]>
 	</select>
-	
+
 	<!-- 페이징 목록부분 -->
 	<select id="listCriteria" resultType="com.nakwon.domain.ReservationHoldVO">
 	<![CDATA[ 
 	select * 
 	from ReservationHold
-	order by RsrvCode limit #{pageStart}, #{perPageNum} 
+	order by RsrvCode asc limit #{pageStart}, #{perPageNum} 
 	]]>
 	</select>
 	
-	<!-- 예약 조회, 예약 수정시 띄우기 -->
 	<select id="userReservationCheck" parameterType="Map" resultType="com.nakwon.domain.ReservationHoldVO">
 		select * 
 		from ReservationHold 
@@ -45,12 +44,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteReservationHold" parameterType="Map">
 		delete from ReservationHold where RsrvCode = #{RsrvCode} and Phone = #{Phone}
 	</delete>
-	
+
 	<!-- 예약 수정: 예약코드가 일치하는 vo 수정 -->
  	<update id="modifyReservationHold">
  	update ReservationHold set Phone =#{Phone}, Name =#{Name}, Email =#{Email}, RsrvDate =#{RsrvDate},
  	Pnum =#{Pnum}, Message =#{Message}, Code =#{Code}, MenuCode =#{MenuCode}, MenuCodeName =#{MenuCodeName}
  	where RsrvCode = #{RsrvCode}
  	</update>
-	
+ 	
+ 	<!-- 관리자 예약 조회: 예약코드가 일치하는 ReservationHoldVO(resultType) 반환 -->
+ 	<select id="reservationRead" resultType="com.nakwon.domain.ReservationHoldVO">
+ 	select *
+ 	from ReservationHold 
+ 	where RsrvCode = #{RsrvCode}
+ 	</select>
+ 	
 </mapper>

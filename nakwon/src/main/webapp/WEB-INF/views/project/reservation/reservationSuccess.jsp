@@ -79,6 +79,7 @@
 </style>
 </head>
 <body>
+<!-- 예약 성공 페이지 - 예약 확인 창 -->
 <%@ include file="../main/top.jsp" %>
 
 <div id="rsrvInsertCheck-allwrap">
@@ -99,7 +100,7 @@
 			<tr class="trBorder"><td class="leftText" colspan="2">&emsp;- 1일 전 및 당일 취소: 예약금 100% 패널티 적용</td></tr>
 			
 			<tr><td class="leftTextTitle">예약자&nbsp; :</td><td class="rightText"> ${Name}</td></tr>
-			<tr><td class="leftTextTitle">예약일&nbsp; :</td><td class="rightText"> <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${RsrvDate}" /></td></tr>
+			<tr><td class="leftTextTitle">예약일&nbsp; :</td><td class="rightText"> <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${RsrvDate}"/></td></tr>
 			<tr><td class="leftTextTitle">예약 인원&nbsp; :</td><td class="rightText"> ${Pnum}명</td></tr>
 			<tr><td class="leftTextTitle">예약 메뉴&nbsp; :</td><td class="rightText"> ${CodeName} 의 ${MenuCodeName}</td></tr>
 			<tr class="trBorder"><td class="leftTextTitle">예약 메시지&nbsp; :</td><td class="rightText"> ${Message}</td></tr>

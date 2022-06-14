@@ -18,9 +18,9 @@
     src: url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap') ;
     font-weight: normal;
     font-style: normal;
-	}
+}
 	
-.menubody{margin:0; padding:0;}
+.menubody{margin:0; padding:0; font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
 
 a{text-decoration:none;}
 /* .wrap{width:100%;height:100%;background-color: yellow;padding: 50px 60px;}*/
@@ -47,19 +47,25 @@ margin-top:10px;vertical-align:top;}
 /* #MenuImg {display:none;} */
 
 #labelImg{font-size: 2rem;text-align:center;width:100px;height:20px;margin-top: 20px;  float:left;cursor: pointer;}
+#MenuImg {margin-top:10px;}
+.BigTitle { 
+	font-weight: bold;
+	font-size: 30px;
+	margin-top: 20px;
+}
 </style>
 
 <body class="menubody">
 <form class="menuAdd" id="menuAddform" name="menuAddform" action="menucheck.do" method="post" accept-charset="utf-8">
 	<div class="wrap">
 		<!-- <a href="#add_menu" class="btn_add">메뉴 등록</a> 얘 없앨거임 -->
-		<button type="button" id="open" class="btn_add">메뉴 등록</button>
+		 <button type="button" id="open" class="btn_add">메뉴 등록</button> 
 		<div id="add_menu" class="menu" style="display:none;">
 	
 		<div class="inner">
 		
 		<button type="button" class="btn_close" ><i class="fa fa-close"></i></button>
-		<h2 style="float:center;">메뉴 등록</h2>
+		<div class="BigTitle" style="float:center;">메뉴 등록</div>
 		
 		<div class="radio">
 			<label><input type="radio" id="course" name="Code" value="course" onchange="radiochk()">만찬</label>
@@ -72,9 +78,9 @@ margin-top:10px;vertical-align:top;}
 		
 		<select id="MenuCodeSelect" name="MenuCodeSelect" onchange="selectfunction()" required>
 						<option value="" selected>코스선택</option>
-						<c:forEach items="${list}" var="menu">
+						<%-- <c:forEach items="${list}" var="menu">
 						<option value="${menu.menuCodeName}">${menu.menuCode}</option>
-						</c:forEach>
+						</c:forEach> --%>
 						<option value="newCode">자동 생성</option>
 		</select>
 		<input type="hidden" id="MenuCode" name="MenuCode" value="" readonly="readonly">
@@ -118,9 +124,10 @@ margin-top:10px;vertical-align:top;}
 
 <script>	
 $(document).ready(function() {
-	$("#open").click(function() {
+	 $("#open").click(function() {
 		$("#add_menu").show();
 	});
+	/* $("#add_menu").show(); */
 });
 	var target=document.querySelectorAll('.btn_add');
 	var targetID;

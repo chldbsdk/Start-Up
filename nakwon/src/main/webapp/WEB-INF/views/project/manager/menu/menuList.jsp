@@ -74,7 +74,7 @@ margin: 0 auto;
 	border-top: none;
 	width: 50px;
 }
-
+#listTbl a {text-decoration:none;color:black;}
 #sampleModalPopup {
 padding:20px;
 }
@@ -142,8 +142,13 @@ li a {
 	
 	</div>
 	
+	
     <div align="right">
+    <!-- <button type="button" onClick="addbtn()">메뉴 등록</button> -->
     <div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="-1"></div>
+	</div>
+	
+	<div class="modal fade" id="sampleModalPopup2" role="dialog" tabindex="-1"></div>
 	</div>
 	
 	
@@ -151,19 +156,20 @@ li a {
 	<thead>
 	<tr>
 	<th class="checkboxborder"><input type="checkbox" name="allCheck" id="allCheck"><label for="allCheck"> All</label></th>
-	<th>만찬/정판</th>
+	<th>만찬/정찬</th>
 	<th>메뉴명</th>
-	<th>내용</th>
+	<th>세부메뉴</th>
 	</tr>
 	</thead>
 	 <c:forEach items="${list}" var="list">
             <tr>
             <td align="center" class="checkboxborder"><input type="checkbox" name="chBox" class="chBox" value="${list.menuDetailCode }"></td>
             	<td align="center">
+            	<%-- <a href="${list.menuDetailCode }" class="aaaa"> --%>
             	<a href='project/manager/menu/viewMenu?MenuDetailCode=<c:out value="${list.menuDetailCode }"/>'>
             	<c:out value="${list.codeName}"/></a></td>
+                <td align="center"><c:out value="${list.menuCodeName}"/></td>
                 <td align="center"><c:out value="${list.menuDetailCodeName}"/></td>
-                <td align="center"><c:out value="${list.menuContent}"/></td>
             </tr>
 </c:forEach> 
 </table>
@@ -197,11 +203,25 @@ li a {
 
 <script>
   $(document).ready(function( $ ){   
-	  
+	  console.log(typeof($(".aaaa").attr("href")));
+	  var url = "http://localhost:8031/project/manager/menu/viewMenu?MenuDetailCode="+$(".aaaa").attr("href");
+	  console.log(url);
+	/*  $(".listTbl a").on("click", function(event){
+			
+			event.preventDefault(); 
+			
+			var targetPage = $(".aaaa").attr("href");
+			
+			var url = "http://localhost:8031/project/manager/menu/viewMenu?MenuDetailCode="+$(".aaaa").attr("href");
+			
+			// 팝업 호출
+			$("#sampleModalPopup2").load(url, function() { });
+		}); */
+
     $(".openPopup").on("click", function(event) { 
     	$("#popup01").show();  
     	$("body").append('<div class="backon"></div>');
-    });
+    }); //openPopup on click
     
     $("#popup01").show(); 
     $("body").append('<div class="backon"></div>');
@@ -211,13 +231,11 @@ li a {
             $("#popup01").hide();
       	    $(".backon").hide();
         }
-     });
-     
-    var url = "http://localhost:8031/project/manager/menu/menuAdd";    
-	// 팝업 호출
-	$("#sampleModalPopup").load(url, function() { });
+     }); //body on click
+    
+    
 
-  });
+ }); //ready
   
   	var target=document.querySelectorAll('.menulist');
 	var targetID;
@@ -230,7 +248,11 @@ li a {
 		});
 	}     
 
-
+	 
+    var url = "http://localhost:8031/project/manager/menu/menuAdd";   
+	// 팝업 호출
+	$("#sampleModalPopup").load(url, function() { });
+	
 //All 눌렀을 경우
 $("#allCheck").click(function(){
 	var chk = $("#allCheck").prop("checked"); //prop("property name"): 속성 값을 가져옴
@@ -253,5 +275,10 @@ $(".pagination li a").on("click", function(event){
 	jobForm.submit();
 });
 
+function addbtn() {
+	var url = "http://localhost:8031/project/manager/menu/menuAdd";    
+	// 팝업 호출
+	$("#sampleModalPopup").load(url, function() { });
+}
 </script>
 </html>
