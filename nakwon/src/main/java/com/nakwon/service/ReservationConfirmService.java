@@ -9,5 +9,5 @@ public interface ReservationConfirmService {
 	
 	public void deleteReservationConfirm(Map<String,String> DeleteInfo) throws Exception;
 	
-	public void modifyReservationConfirm(ReservationConfirmVO vo) throws Exception; //¿¹¾à¼öÁ¤
+	public void modifyReservationConfirm(ReservationConfirmVO vo) throws Exception; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }

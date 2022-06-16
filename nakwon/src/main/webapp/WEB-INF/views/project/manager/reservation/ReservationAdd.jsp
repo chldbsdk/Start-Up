@@ -57,8 +57,11 @@ a { text-decoration:none; }
 	float:right;
 	background-color:lightgray;
 } 
+
+
 #label { text-align:center; width:100px; height:20px;margin-top: 20px;  float:left;} 
 #labelImg{font-size: 2rem;text-align:center;width:100px;height:20px;margin-top: 20px;  float:left;cursor: pointer;}
+
 .btn_next {
 	display: block;
 	width: 45px;
@@ -106,6 +109,7 @@ textarea {
 	font-weight: bold;
 	text-align:center;
 }
+
 <!-- 달력의 주말 색상 다르게 변경(일: 빨강, 토: 파랑)-->
 .ui-datepicker-calendar > tbody td.ui-datepicker-week-end:first-child a { color: red; }
 .ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color: #0099ff; }
@@ -350,6 +354,7 @@ $(document).ready(function() {
 	      	} 
 		});
 	}
+
 	//달력 설정 
 	const config = {
 			dateFormat: 'yy-mm-dd', //형식을 yy-mm-dd로 바꿈 
@@ -368,16 +373,19 @@ $(document).ready(function() {
 		    beforeShowDay: disableAllTheseDays,
 		    showMonthAfterYear : true //달보다 월이 면저 표시
 	}
+
 	//달력 생성
 	$(function(){
 		$("input[name='publeYear']").datepicker(config);
 		console.log($.datepicker);
 	});
+
 	//달력에서 특정 요일 비활성화
 	function disableAllTheseDays(date){
 		var day = date.getDay();
 		return [(day != 0 && day != 1)]; //휴무일인 일, 월 비활성화
 	}
+
 	//코스선택 select박스 선택시 메뉴선택 select박스 value 변동
 	function courseChange(e){
 		Code = $("#courseselect").val(); //Code 값

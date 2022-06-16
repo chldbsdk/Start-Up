@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 </head>
 <style>
 @font-face {
@@ -40,7 +42,7 @@ font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
 
 .input {width: 70%;height: 30px; border: none;background-color: #ededed;border-radius: 4px;color: #333;padding:10px;margin-top:10px;}
 textarea { width: 70%;height: 20px;border: none;background-color: #ededed;border-radius: 4px;color: #333;padding:100px 10px;
-margin-top:10px;vertical-align:top;}
+margin-top:10px;vertical-align:top; resize:none;}
 
 #label { text-align:center; width:100px; height:20px;margin-top: 20px;  float:left;} 
 #label1 { text-align:center;width:100px;height:20px; margin-top: 20px;  float:left;} 
@@ -186,7 +188,17 @@ $(document).ready(function() {
 		}
 		document.getElementById("MenuDetailCode").value=result;
 		
-		alert("등록 성공"); //이거 바꾸기 if 문으로
+		/* swal({
+			title: "소개 등록에 성공하였습니다.",
+			text: "소개 리스트 화면으로 이동합니다.",
+			icon: "success",
+			closeOnClickOutside: false
+		}).then((resultBtn2) => {
+			if(resultBtn2){
+				location.href='history.back()';
+			}
+		}); */
+		alert("등록 성공");
 		history.back();
 		document.menuAddform.submit();
 	}

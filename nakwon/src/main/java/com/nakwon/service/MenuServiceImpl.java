@@ -29,6 +29,10 @@ public class MenuServiceImpl implements MenuService{
 	}
 	
 	@Override
+	public void delete(String MenuDetailCode) throws Exception {
+		dao.delete(MenuDetailCode);
+	}
+	@Override
 	public List<MenuVO> menuListAll()throws Exception {
 		return dao.menuListAll();
 	}

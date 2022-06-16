@@ -12,6 +12,8 @@ public interface MenuService {
 	
 	public void update(MenuVO vo) throws Exception;
 	
+	public void delete(String MenuDetailCode) throws Exception;
+	
 	public List<MenuVO> menuListAll() throws Exception;
 	
 	public List<MenuVO> menuCodeListAll(String Code) throws Exception;

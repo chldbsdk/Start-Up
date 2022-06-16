@@ -30,6 +30,11 @@ public class MenuDAOImpl implements MenuDAO{
 	 }
 	
 	@Override
+	public void delete(String MenuDetailCode) throws Exception {
+		sqlSession.delete(namespace+".delete",MenuDetailCode);
+	}
+	
+	@Override
 	public List<MenuVO> menuListAll()throws Exception {
 		return sqlSession.selectList(namespace+".menuListAll");
 	}

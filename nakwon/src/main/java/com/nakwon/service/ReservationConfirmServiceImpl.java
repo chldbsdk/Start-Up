@@ -21,7 +21,7 @@ public class ReservationConfirmServiceImpl implements ReservationConfirmService 
 		dao.deleteReservationConfirm(DeleteInfo);
 	}
 	
-	//¿¹¾à ¼öÁ¤
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void modifyReservationConfirm(ReservationConfirmVO vo) throws Exception {
 		dao.modifyReservationConfirm(vo);

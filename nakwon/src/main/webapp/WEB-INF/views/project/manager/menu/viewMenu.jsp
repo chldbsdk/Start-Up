@@ -44,7 +44,7 @@ margin-top:10px;vertical-align:top;}
 
 #label { text-align:center; width:100px; height:20px;margin-top: 20px;  float:left;} 
 #label1 { text-align:center;width:100px;height:20px; margin-top: 20px;  float:left;} 
-#MenuImg {display:none;}
+#MenuImg {margin-top:10px;}
 
 #labelImg{font-size: 2rem;text-align:center;width:100px;height:20px;margin-top: 20px;  float:left;cursor: pointer;}
 
@@ -53,10 +53,13 @@ margin-top:10px;vertical-align:top;}
 	font-size: 30px;
 	margin-top: 20px;
 }
+.btn_delete {display: block;width: 45px;height: 40px;margin: 5px 30px;color: black;font-size: 1rem;border: none;
+border-radius:10px;cursor: pointer;transition: .3s linear;float:right;background-color:lightgray;
+font-family: 'Yeon Sung', cursive; font-color: #0D47A1;} 
 </style>
 
 <body class="modifybody">
-<form class="menumodify" id="menumodifyform" name="menumodifyform" method="post" accept-charset="utf-8">
+<form class="menumodify" id="menumodifyform" name="menumodifyform" role="form" method="post" accept-charset="utf-8">
 	<div class="wrap">
 		<!-- <a href="#add_menu" class="btn_add">메뉴 등록</a> 얘 없앨거임 -->
 		<!-- <button type="button" id="open" class="btn_add">메뉴 등록</button> -->
@@ -121,12 +124,13 @@ margin-top:10px;vertical-align:top;}
 		<c:out value="${menu.menuAllergy}"/></textarea>
 		<br>
 	
-		<label for="MenuImg" id="labelImg"><i class='fas fa-plus'></i></label>
+		<!-- <label for="MenuImg" id="labelImg"><i class='fas fa-plus'></i></label> -->
 		<input type="file" id="MenuImg" name="MenuImg"/>
 		<!-- <button type="button" class="btn_img" onclick="imgupload()"><i class="fas fa-plus"></i></button> -->
 		<br>
 		
 		<button type="button" class="btn_next" onclick="modifyBtn()">수정</button>
+		<button type="button" class="btn_delete" onclick="remove()">삭제</button>
 		
 		</div>
 		</div>
@@ -157,6 +161,14 @@ $(document).ready(function() {
 	  });
 	}
 	
+	//삭제 버튼 클릭
+	function remove() {
+		var form=$("form[role='form']");
+		form.attr("action","menuremove");
+		form.submit();
+	}
+	
+	//수정 버튼 클릭
 	function modifyBtn() {
 		if(document.menumodifyform.MenuDetailCodeName.value=="") {
 			alert("메뉴명을 입력해주세요.");
@@ -202,6 +214,7 @@ $(document).ready(function() {
 		document.menumodifyform.submit();
 	}
 	 
+	//라디오 버튼 만찬인지 정찬인지 체크
 	function radiochk(){	
 		var radioVal=$("#course").prop("checked");
 		var codename=document.getElementById("CodeName");
@@ -212,6 +225,7 @@ $(document).ready(function() {
 		else codename.value="정찬(세트메뉴)";
 	}
 		
+	//자동생성 클릭 시 메뉴코드 난수로 생성
 	function selectfunction() {
 		var sel = document.getElementById("MenuCodeSelect");
 		var img = document.getElementById("MenuCodeName");
@@ -232,6 +246,8 @@ $(document).ready(function() {
 			menucode.value=result;
 		}
 	}
+	
+	
 </script>
 </body>
 </html> 

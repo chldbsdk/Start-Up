@@ -20,7 +20,7 @@ public class ReservationController {
 	@Inject
 	private ReservationHoldService reservationholdservice;
 	
-	//¿¹¾à ¸ñ·Ï
+	//���� ���
 	@RequestMapping(value="/reservationList", method=RequestMethod.GET)
 	public void menuList(@ModelAttribute("cri") Criteria cri, ReservationHoldVO vo, Model model) throws Exception{
 		 System.out.println(cri.toString());
@@ -51,6 +51,7 @@ public class ReservationController {
 		//introduceservice.introduceinsert(vo);
 	}
 	
+	//���� ��ȸ
 	@RequestMapping(value = "/reservationRead", method = RequestMethod.GET) 
 	public void reservationRead(@RequestParam("rsrvCode") String rsrvCode, Model model) throws Exception {
 		model.addAttribute("vo", reservationholdservice.reservationRead(rsrvCode));  

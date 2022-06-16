@@ -24,7 +24,7 @@ public class ReservationConfirmDAOImpl implements ReservationConfirmDAO{
 	}
 	
 	@Override
-	public void modifyReservationConfirm(ReservationConfirmVO vo) throws Exception { //¿¹¾à ¼öÁ¤
+	public void modifyReservationConfirm(ReservationConfirmVO vo) throws Exception { //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		sqlSession.update(namespace + ".modifyReservationConfirm", vo);
 	}
 }

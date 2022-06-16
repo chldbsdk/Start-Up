@@ -3,6 +3,12 @@
 <html>
 <head>
 <style>
+@font-face {
+    font-family: 'HSGyoulnoonkot';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGyoulnoonkot.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 #locInfo-allwrap{
 	margin-top: 40px;
 	margin-bottom: 40px;
@@ -44,6 +50,7 @@
 	width: 530px;
 	font-size: 15px;
 }
+#locInfo-allwrap{font-family: 'HSGyoulnoonkot';}
 </style>
 </head>
 <body>

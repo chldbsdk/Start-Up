@@ -265,6 +265,7 @@ $(document).ready(function( $ ){
 		});
 	}     
 });
+
 //All 눌렀을 경우
 $("#allCheck").click(function(){
 	var chk = $("#allCheck").prop("checked"); //prop("property name"): 속성 값을 가져옴
@@ -274,6 +275,7 @@ $("#allCheck").click(function(){
 		$(".chBox").prop("checked", false); //체크박스 체크 x
 	}
 });
+
 //하단 페이징 버튼(li)을 눌렀을 경우
 $(".pagination li a").on("click", function(event){
 	

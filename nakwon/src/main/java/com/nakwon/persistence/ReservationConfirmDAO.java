@@ -5,9 +5,9 @@ import com.nakwon.domain.ReservationConfirmVO;
 
 public interface ReservationConfirmDAO {
 	
-	public ReservationConfirmVO userReservationCheck(Map<String,String> Check) throws Exception; //¿¹¾àÀÚ ¿¹¾à Á¶È¸
+	public ReservationConfirmVO userReservationCheck(Map<String,String> Check) throws Exception; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	
-	public void deleteReservationConfirm(Map<String,String> DeleteInfo) throws Exception; //¿¹¾à »èÁ¦
+	public void deleteReservationConfirm(Map<String,String> DeleteInfo) throws Exception; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
-	public void modifyReservationConfirm(ReservationConfirmVO vo) throws Exception; //¿¹¾à ¼öÁ¤
+	public void modifyReservationConfirm(ReservationConfirmVO vo) throws Exception; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 }

@@ -15,6 +15,12 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'HSGyoulnoonkot';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGyoulnoonkot.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 #rsrvInsertCheck-allwrap{
 	max-width: 1000px;
 	height: 1000px;
@@ -105,6 +111,7 @@
 	margin: 30px 0 30px 0;
 }
 .swal-title, .swal-text {font-family: 'JSArirangHON-Regular';}
+.BicCenter,.trBorder,.BicCenterEnd,.Middle {font-family: 'HSGyoulnoonkot';}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

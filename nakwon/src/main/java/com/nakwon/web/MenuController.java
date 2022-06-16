@@ -160,7 +160,20 @@ public class MenuController {
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		return "project/manager/managerMain";
 	}
-
+	
+	@RequestMapping(value="/menuremove", method=RequestMethod.POST)
+	public String menuremove(@RequestParam("MenuDetailCode") String MenuDetailCode,Model model,RedirectAttributes rttr) throws Exception{
+		menuservice.delete(MenuDetailCode);
+		System.out.println("menuremove");
+		//model.addAttribute("msg", "SUCCESS");
+		rttr.addFlashAttribute("msg","SUCCESS");
+	    return "redirect:/project/manager/menu/menuRemoveSuccess";
+			
+	}
+	@RequestMapping(value="/menuRemoveSuccess", method=RequestMethod.GET)
+	public void removesuccess() throws Exception{
+		System.out.println("success");
+	}
 	//test
 	@RequestMapping(value="/test", method=RequestMethod.GET)
 	public void test(MenuVO vo, Model model) throws Exception{

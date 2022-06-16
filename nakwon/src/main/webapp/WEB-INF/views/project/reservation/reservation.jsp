@@ -12,6 +12,7 @@
     font-weight: normal;
     font-style: normal;
 }
+#reservationTable-allwrap {font-family: 'HSGyoulnoonkot';}
 .essential {color: red;}
 #reservationTable-allwrap{
 	padding-top: 60px;
@@ -38,7 +39,7 @@
 .reservationTableTextSmall {color: #4e4e4e;}
 ul {
 	list-style:none;
-	margin-bottom: 15px;
+	margoin-bttom: 15px;
 }
 .reservationTitle{
 	font-size: 17px;
@@ -80,6 +81,7 @@ ul {
 #Pnum {width: 210px;} 
 #btn-wrap {text-align: center;}
 #courseselect, #menuselect {width: 180px;}
+
 <!-- 달력의 주말 색상 다르게 변경(일: 빨강, 토: 파랑)-->
 .ui-datepicker-calendar > tbody td.ui-datepicker-week-end:first-child a { color: red; }
 .ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color: #0099ff; }
@@ -261,6 +263,7 @@ function direct(e){
       	} 
 	});
 }
+
 //달력 설정 
 const config = {
 		dateFormat: 'yy-mm-dd', //형식을 yy-mm-dd로 바꿈 
@@ -279,16 +282,19 @@ const config = {
 	    beforeShowDay: disableAllTheseDays,
 	    showMonthAfterYear : true //달보다 월이 면저 표시
 }
+
 //달력 생성
 $(function(){
 	$("input[name='publeYear']").datepicker(config);
 	
 });
+
 //달력에서 특정 요일 비활성화
 function disableAllTheseDays(date){
 	var day = date.getDay();
 	return [(day != 0 && day != 1)]; //휴무일인 일, 월 비활성화
 }
+
 //코스선택 select박스 선택시 메뉴선택 select박스 value 변동
 function courseChange(e){
 	Code = $("#courseselect").val(); //Code 값
@@ -311,6 +317,7 @@ function courseChange(e){
 		}
 	});  
 }
+
 //submit전에 함수 실행
 document.getElementById("reservationform").onsubmit=function(){
 	//날짜와 시간 합치기
@@ -325,7 +332,6 @@ document.getElementById("reservationform").onsubmit=function(){
 	for(i=0; i<num; i++){ //난수 생성 for문
 		result += charList.charAt(Math.floor(Math.random() * charListLen));
 	}
-	
 	$("input[name=rsrvCode]").attr("value", result); //name이 rsrvCode인 input에 result을 value로 지정
 	
 	//사용자 이메일과 도메인 합치기
@@ -347,6 +353,7 @@ document.getElementById("reservationform").onsubmit=function(){
 	$("input[name=CodeName]").attr("value", CodeName);
 	$("input[name=MenuCodeName]").attr("value", MenuCodeName);
 }
+
 </script>
 
 <%@ include file="../main/footer.jsp" %>

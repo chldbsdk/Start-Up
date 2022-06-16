@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +65,20 @@
 <br><br>
 </section>
 <footer><%@ include file="footer.jsp" %></footer>
+<c:if test = "${msg=='SUCCESS' }">
+	<script type="text/javascript">
+		swal({
+			title: "메뉴가 삭제되었습니다.",
+			text: "메인 화면으로 이동합니다.",
+			icon: "success",
+			closeOnClickOutside: false
+		}).then((resultBtn2) => {
+			if(resultBtn2){
+				location.href="http://localhost:8031/managerMain";
+			}
+		});
+	</script>
+</c:if>
 </body>
 <script>
 //소개 팝업 호출

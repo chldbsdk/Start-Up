@@ -79,6 +79,7 @@
 #btn-wrap {text-align: center;}
 #courseselect, #menuselect {width: 180px;}
 .swal-title, .swal-text {font-family: 'JSArirangHON-Regular';}
+
 <!-- 달력의 주말 색상 다르게 변경(일: 빨강, 토: 파랑)-->
 .ui-datepicker-calendar > tbody td.ui-datepicker-week-end:first-child a { color: red; }
 .ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color: #0099ff; }
@@ -123,6 +124,7 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 	padding: 5px; 
 	font-size: 12px; 
 } 
+#reservationTable-allwrap {font-family: 'HSGyoulnoonkot';}
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -201,7 +203,7 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 						<option value="course">만찬(풀코스)</option>
 						<option value="set">정찬(세트메뉴)</option>
 					</select>
-
+					
 					<select id="menuselect" name="menuselect">
 						<option value="">메뉴선택</option>
 					</select> 
@@ -278,6 +280,8 @@ $(document).ready(function(){
    	});
 	
 });
+
+
 //도메인 직접입력 눌렀을 경우 직접입력 input박스 보이게 하기
 function direct(e){
 	$("#domain option:selected").each(function () { 
@@ -290,9 +294,11 @@ function direct(e){
           	$("#selBoxDirect").hide(); //input박스 숨기기
           	$("#selBoxDirect").attr("disabled", true); //비활성화
           	$("#domain").attr("disabled", false); //비활성화
+
       	} 
 	});
 }
+
 //달력 설정 
 const config = {
 		dateFormat: 'yy-mm-dd', //형식을 yy-mm-dd로 바꿈 
@@ -311,16 +317,19 @@ const config = {
 	    beforeShowDay: disableAllTheseDays,
 	    showMonthAfterYear : true //달보다 월이 면저 표시
 }
+
 //달력 생성
 $(function(){
 	$("input[name='publeYear']").datepicker(config);
 	
 });
+
 //달력에서 특정 요일 비활성화
 function disableAllTheseDays(date){
 	var day = date.getDay();
 	return [(day != 0 && day != 1)]; //휴무일인 일, 월 비활성화
 }
+
 //코스선택 select박스 선택시 메뉴선택 select박스 value 변동
 function courseChange(e){
 	Code = $("#courseselect").val(); //Code 값
@@ -343,6 +352,7 @@ function courseChange(e){
 		}
 	});  
 }
+
 //submit전에 함수 실행
 document.getElementById("reservationform").onsubmit=function(){
 	//날짜와 시간 합치기
@@ -371,6 +381,7 @@ document.getElementById("reservationform").onsubmit=function(){
 	$("input[name=CodeName]").attr("value", CodeName);
 	$("input[name=MenuCodeName]").attr("value", MenuCodeName);
 }
+
 </script>
 
 <%@ include file="../main/footer.jsp" %>

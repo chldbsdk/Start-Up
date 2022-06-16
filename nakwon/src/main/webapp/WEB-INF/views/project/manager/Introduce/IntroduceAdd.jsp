@@ -2,21 +2,31 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-<style>@font-face {
+<style>
+@font-face {
     font-family: 'Yeon Sung', cursive;
     src: url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap') ;
     font-weight: normal;
     font-style: normal;
 	}
-	
+@font-face {
+    font-family: 'JSArirangHON-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/JSArirangHON-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.swal-title, .swal-text {font-family: 'JSArirangHON-Regular';}
 .introducebody{margin:0; padding:0;}
 a{text-decoration:none;}
 .introduce{position:fixed; top:0; left:0; right:0; bottom:0;background:rgba(0,0,0,.5);font-size:0; text-align:center;overflow:auto;}
@@ -35,7 +45,6 @@ margin-top:10px;vertical-align:top;}
 /* #IntroImg {display:none;} */
 #labelImg{font-size: 2rem;text-align:center;width:100px;height:20px;margin-top: 20px;  float:left;cursor: pointer;}
 </style>
-
 <body class="introducebody">
 <% request.setCharacterEncoding("UTF-8"); %>
 <form class="introduceAdd" name="introduceAddform" method="post" accept-charset="utf-8" action="introducecheck.do">
@@ -69,7 +78,7 @@ margin-top:10px;vertical-align:top;}
 </form>
 
 
-<script type="text/javascript">	
+<script type="text/javascript" font-family="JSArirangHON-Regular">	
 $(document).ready(function() {
 	$("#open").click(function() {
 		$("#add_introduce").show();
@@ -90,18 +99,29 @@ $(document).ready(function() {
 	  btnPopClose[j].addEventListener('click', function(){
 	    this.parentNode.parentNode.style.display = 'none';
 	  });
-	}
+	}	
 	
 	function AddBtn() {
-				
+		
 		if(document.introduceAddform.IntroTitle.value=="" && document.introduceAddform.IntroContent.value=="") {
-			alert("제목 또는 상세 내용을 입력해주세요.");
+			
+			swal({
+				title: "소개 등록에 실패하였습니다.",
+				text: "제목 또는 세부내용을 작성해주세요.",
+				icon: "error",
+				closeOnClickOutside: false
+			});			
 			document.introduceAddform.IntroTitle.focus();
 			document.introduceAddform.IntroContent.focus();
 			return;
 		}		
 			
-		alert("등록 성공");
+		swal({
+			title: "소개 등록에 성공하였습니다.",
+			text: "소개 리스트 화면으로 이동합니다.",
+			icon: "success",
+			closeOnClickOutside: false
+		});
 		history.back();
 		document.introduceAddform.submit();
 	}

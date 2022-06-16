@@ -57,8 +57,10 @@ a { text-decoration:none; }
 	float:right;
 	background-color:lightgray;
 } 
+
 #label { text-align:center; width:100px; height:20px;margin-top: 20px;  float:left;} 
 #labelImg{font-size: 2rem;text-align:center;width:100px;height:20px;margin-top: 20px;  float:left;cursor: pointer;}
+
 .btn_next {
 	display: block;
 	width: 45px;
@@ -116,9 +118,9 @@ textarea {
 <form class="reservationRead" name="introduceReadform" method="post" accept-charset="utf-8" action="introducecheck.do">
 	<div class="wrap">
 		<div id="read_reservation" class="reservation" style="display:none;">
-
+	
 	<div class="inner">
-
+		
 		<button type="button" class="btn_close"><i class="fa fa-close"></i></button>
 		<h2 style="float:center;">예약 등록</h2>
 	<div id="table-wrap">
@@ -175,4 +177,4 @@ $(document).ready(function() {
 	}
 </script>
 </body>
-</html>  
+</html> 

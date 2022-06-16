@@ -21,6 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where MenuDetailCode = #{MenuDetailCode}
  	</update>
  	
+ 	 <delete id="delete"> <!-- 메뉴 삭제 -->
+ 	delete from Menu where MenuDetailCode = #{MenuDetailCode}
+ 	</delete>
+ 
 	<select id="menuListAll" resultType="com.nakwon.domain.MenuVO">
 	<![CDATA[
 	select *

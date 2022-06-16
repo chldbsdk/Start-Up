@@ -11,6 +11,18 @@
     <title>Document</title>
 </head>
 <style>
+@font-face {
+    font-family: 'Yeon Sung', cursive;
+    src: url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap') ;
+    font-weight: normal;
+    font-style: normal;
+}
+body {font-family: 'Yeon Sung', cursive; font-color: #0D47A1;}
+.BigTitle { 
+	font-weight: bold;
+	font-size: 30px;
+	margin-top: 20px;
+}
 #popup01{
 vertical-align:middle;
 display: none;
@@ -85,7 +97,7 @@ li a {
     <div class="close">close</div>
     <div>
 
-    <h2 align="center">소개 목록</h2>
+    <div class="BigTitle" align="center">소개 목록</div>
 
     <div align="right">
     <div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="-1"></div>

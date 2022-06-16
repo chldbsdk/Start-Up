@@ -10,6 +10,8 @@ public interface MenuDAO {
 	public MenuVO read(String MenuDetailCode) throws Exception;
 	
 	public void update(MenuVO vo) throws Exception;
+	
+	public void delete(String MenuDetailCode) throws Exception;
 
 	public List<MenuVO> menuListAll() throws Exception;
 	

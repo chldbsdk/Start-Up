@@ -5,6 +5,12 @@
 <meta charset="utf-8">
 <title>낙원</title>
 <style>
+@font-face {
+    font-family: 'HSGyoulnoonkot';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGyoulnoonkot.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 #allwrapper{
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -43,6 +49,7 @@
 	margin: 0 auto;
 }
 #location-table {margin: 0 auto;}
+#location-allwrap{font-family: 'HSGyoulnoonkot';}
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9edaf335e3e730759227d72dfcd75fa4"></script>
 
